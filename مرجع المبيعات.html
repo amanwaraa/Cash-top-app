@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<title>مرتجع المبيعات - كاش توب 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="cashtop-core.css?v=125">
+<style>
+*{box-sizing:border-box}body{font-family:'Cairo',sans-serif;background:#f8fafc;color:#1e293b;overflow-x:hidden}
+.sales-return-page{max-width:1280px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:20px}
+.sr-page-title{border-bottom:1px solid #e2e8f0;padding:4px 0 14px;margin:0;font-size:22px;font-weight:800;display:flex;gap:10px;align-items:center}
+.sr-page-title i{color:#ef4444}.sr-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 1px 3px rgba(15,23,42,.05);padding:18px}
+.sr-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.sr-field label{display:block;font-size:13px;font-weight:800;color:#334155;margin-bottom:7px}
+.sr-required{color:#ef4444}.sr-input-wrap{position:relative}.sr-input-wrap>i{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#94a3b8;z-index:2}
+.sr-input,.sr-number{width:100%;height:43px;border:1px solid #e2e8f0;border-radius:8px;background:#fff;padding:8px 12px;outline:none;font:600 13px 'Cairo';color:#334155;transition:border-color .15s,box-shadow .15s}
+.sr-input.with-icon{padding-right:38px}.sr-input:focus,.sr-number:focus{border-color:#f87171;box-shadow:0 0 0 2px rgba(248,113,113,.12)}
+.sr-autocomplete{position:absolute;top:calc(100% + 4px);right:0;left:0;z-index:120;background:#fff;border:1px solid #f1f5f9;border-radius:8px;box-shadow:0 12px 28px rgba(15,23,42,.15);max-height:250px;overflow:auto;padding:4px;display:none}
+.sr-autocomplete.show{display:block}.sr-product-portal{position:fixed;z-index:9000;right:auto;left:auto;top:auto;min-width:240px;max-width:min(520px,calc(100vw - 20px))}.sr-suggestion{width:100%;border:0;background:#fff;padding:9px 11px;border-radius:7px;text-align:right;cursor:pointer;font:600 12px 'Cairo';display:flex;justify-content:space-between;gap:8px;align-items:center}
+.sr-suggestion:hover,.sr-suggestion:focus{background:#fff1f2;color:#be123c;outline:none}.sr-suggestion small{color:#94a3b8;font-size:10px;white-space:nowrap}
+.custom-dropdown{position:relative;width:100%}.dropdown-btn{width:100%;min-height:43px;background:#fff;border:1px solid #e2e8f0;color:#334155;padding:8px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font:700 13px 'Cairo';transition:border-color .15s}
+.dropdown-btn:hover,.dropdown-btn:focus{border-color:#f87171;outline:none}.selected-text{display:flex;align-items:center;gap:8px;min-width:0}.selected-text i{color:#94a3b8}
+.dropdown-options{position:absolute;z-index:130;width:100%;background:#fff;border:1px solid #f1f5f9;border-radius:8px;margin-top:4px;box-shadow:0 12px 28px rgba(15,23,42,.15);max-height:260px;overflow:auto;padding:4px;transform-origin:top;transition:opacity .15s,transform .15s}
+@media (prefers-reduced-motion: no-preference){.dropdown-options,.sr-autocomplete,.sr-toast,.sr-modal-box{will-change:transform,opacity}}
+.dropdown-options.hidden{opacity:0;transform:scaleY(.96);pointer-events:none;visibility:hidden}.dropdown-item{padding:9px 11px;border-radius:7px;cursor:pointer;display:flex;align-items:center;gap:9px;font-size:12px;color:#334155;border-bottom:1px solid #f8fafc}
+.dropdown-item:last-child{border-bottom:0}.dropdown-item:hover{background:#fff1f2;color:#be123c}.dropdown-item i{width:18px;color:#94a3b8;text-align:center}
+.sr-products-card{padding:0;overflow:visible}.sr-products-head{background:rgba(254,242,242,.65);border-bottom:1px solid #fee2e2;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-radius:12px 12px 0 0}
+.sr-products-head h3{margin:0;font-size:17px;display:flex;align-items:center;gap:8px;color:#334155}.sr-products-head h3 i{color:#ef4444}.sr-total-chip{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #fee2e2;border-radius:8px;padding:5px 12px}
+.sr-total-chip span:first-child{font-size:12px;font-weight:800;color:#64748b}.sr-total-chip strong{font-size:18px;color:#dc2626}
+.sr-table-wrap{width:100%;overflow-x:auto;overscroll-behavior-inline:contain}.sr-table{width:100%;min-width:760px;border-collapse:collapse;text-align:right}.sr-table th{padding:11px 10px;background:#f8fafc;color:#64748b;font-size:12px;border-bottom:1px solid #e2e8f0;white-space:nowrap}.sr-table td{padding:9px 10px;border-bottom:1px solid #f1f5f9;vertical-align:top;font-size:12px}
+.sr-table .sr-row-index{color:#94a3b8;text-align:center;padding-top:18px}.sr-table .sr-row-total{font-weight:800;color:#dc2626;text-align:left;white-space:nowrap;padding-top:18px}.sr-delete-row{width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:#cbd5e1;cursor:pointer}.sr-delete-row:hover{color:#ef4444;background:#fef2f2}
+.sr-add-row{margin:10px;width:calc(100% - 20px);height:38px;border:1px dashed #fecaca;border-radius:8px;background:#fff;color:#ef4444;font:700 12px 'Cairo';cursor:pointer}.sr-add-row:hover{background:#fff1f2;color:#b91c1c}
+.sr-actions{padding:14px 18px;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;border-radius:0 0 12px 12px}.sr-save{border:0;border-radius:8px;background:#dc2626;color:#fff;padding:10px 24px;font:800 13px 'Cairo';cursor:pointer;display:flex;gap:8px;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(220,38,38,.18)}.sr-save:hover{background:#b91c1c}.sr-save.editing{background:#f59e0b}.sr-save.editing:hover{background:#d97706}
+.sr-log-card{padding:0;overflow:hidden}.sr-log-head{padding:14px 18px;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:10px}.sr-log-head h3{margin:0;font-size:16px;color:#334155;display:flex;gap:8px;align-items:center}.sr-log-head i{color:#94a3b8}.sr-badge{font-size:11px;color:#64748b;background:#fff;border:1px solid #e2e8f0;border-radius:999px;padding:4px 10px}
+.sr-log-table{width:100%;min-width:780px;border-collapse:collapse}.sr-log-table th{padding:11px 14px;text-align:right;color:#64748b;font-size:12px;background:#fff;border-bottom:1px solid #f1f5f9}.sr-log-table td{padding:11px 14px;border-bottom:1px solid #f1f5f9;font-size:12px}.sr-log-actions{display:flex;justify-content:center;gap:6px}.sr-icon-btn{width:31px;height:31px;border-radius:8px;border:1px solid;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;background:#fff}.sr-view{color:#3b82f6;border-color:#bfdbfe;background:#eff6ff}.sr-edit{color:#f59e0b;border-color:#fde68a;background:#fffbeb}.sr-del{color:#ef4444;border-color:#fecaca;background:#fef2f2}.sr-source-tag{display:inline-flex;padding:4px 8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;color:#475569;font-weight:700;font-size:10px}
+.sr-empty{padding:28px!important;text-align:center;color:#94a3b8}#toast-container{position:fixed;top:18px;left:18px;z-index:9999;display:flex;flex-direction:column;gap:8px;width:min(320px,calc(100vw - 36px));pointer-events:none}.sr-toast{background:#fff;border-right:4px solid #22c55e;border-radius:8px;box-shadow:0 12px 28px rgba(15,23,42,.18);padding:11px 13px;display:flex;gap:9px;align-items:center;font-size:12px;font-weight:800;transform:translateX(-20px);opacity:0;transition:transform .18s,opacity .18s}.sr-toast.show{transform:none;opacity:1}.sr-toast.error{border-color:#ef4444}.sr-toast.info{border-color:#3b82f6}
+.sr-modal{display:none;position:fixed;inset:0;z-index:6500;background:rgba(15,23,42,.42);backdrop-filter:blur(2px);padding:16px;align-items:center;justify-content:center}.sr-modal.show{display:flex}.sr-modal-box{width:min(760px,100%);max-height:88dvh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 24px 70px rgba(15,23,42,.25)}.sr-modal-head{padding:14px 18px;background:#eff6ff;border-bottom:1px solid #dbeafe;display:flex;justify-content:space-between;align-items:center}.sr-modal-head h3{margin:0;font-size:16px;display:flex;gap:8px;align-items:center}.sr-close{width:31px;height:31px;border:0;border-radius:8px;background:#fff;color:#94a3b8;cursor:pointer}.sr-modal-info{padding:15px 18px;background:#f8fafc;border-bottom:1px solid #f1f5f9;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.sr-modal-info small{display:block;color:#94a3b8;font-weight:700;margin-bottom:3px}.sr-modal-info strong{font-size:12px}.sr-modal-body{padding:15px 18px}.sr-modal-foot{padding:14px 18px;background:#f8fafc;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;gap:10px}.sr-modal-total{font-size:20px;color:#dc2626;font-weight:900}
+.sr-cancel{border:1px solid #e2e8f0;background:#fff;color:#475569;border-radius:8px;padding:8px 17px;font:700 12px 'Cairo';cursor:pointer}.sr-danger{border:0;background:#dc2626;color:#fff;border-radius:8px;padding:9px 18px;font:800 12px 'Cairo';cursor:pointer}
+@media(max-width:760px){.sales-return-page{padding:10px;gap:14px}.sr-grid-2{grid-template-columns:1fr}.sr-page-title{font-size:18px}.sr-card{padding:14px}.sr-products-head{padding:11px 12px}.sr-products-head h3{font-size:14px}.sr-total-chip strong{font-size:15px}.sr-actions{padding:11px}.sr-save{width:100%}.sr-modal-info{grid-template-columns:1fr 1fr}}
+</style>
+<script src="cashtop-core.js?v=126"></script>
+<script src="multi-system.js?v=100"></script>
+<script src="activation-runtime.js?v=500"></script><script src="turso-config.js?v=500"></script><script src="turso-rtdb.js?v=101"></script>
+<script src="accounting-engine.js?v=100"></script>
+<script src="turso-sync.js?v=127"></script>
+<script src="cashtop-download-fix.js?v=90"></script>
+</head>
+<body>
+<div class="ct-sidebar-overlay" id="ctSidebarOverlay" data-ct-action="close-sidebar"></div>
+<div class="ct-app-shell">
+  <aside class="ct-sidebar" id="ctSidebar" aria-label="القائمة الجانبية">
+    <div class="ct-sidebar-brand">
+      <img src="cashtop-logo.png" alt="كاش توب 2">
+      <strong>كاش توب 2</strong>
+      <small id="ctSidebarCompany">كاش توب</small>
+    </div>
+
+    <nav class="ct-sidebar-nav">
+      <a class="ct-menu-link" href="لوحة التحكم.html" data-page="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>لوحة التحكم</span></a>
+      <a class="ct-menu-link" href="cashier.html" data-page="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-boxes-stacked"></i><span>المخزون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="products.html">المنتجات</a>
+          <a href="materials.html">الأصناف</a>
+          <a href="warehouses.html">المخازن</a>
+          <a href="branches.html">الفروع</a>
+          <a href="units.html">الوحدات</a>
+          <a href="shortages.html">النواقص</a>
+          <a href="barcode-generator.html">الباركود</a>
+          <a href="ادارة التصنيع.html">التصنيع</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-file-invoice-dollar"></i><span>الفواتير</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="invoices.html">فواتير المبيعات</a>
+          <a href="مرجع المبيعات.html">مرتجع المبيعات</a>
+          <a href="المشتريات.html">المشتريات</a>
+          <a href="مرجع المشتريات.html">مرتجع المشتريات</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users"></i><span>العملاء والموردون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="customers.html">العملاء</a>
+          <a href="customer-groups.html">مجموعات العملاء</a>
+          <a href="suppliers.html">الموردون</a>
+          <a href="المناديب.html">المناديب</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-wallet"></i><span>الحسابات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="accounts.html">الصناديق والحسابات</a>
+          <a href="journal.html">دفتر الأستاذ</a>
+          <a href="sands.html">سندات القبض والصرف</a>
+          <a href="المصاريف.html">المصاريف</a>
+          <a href="التقارير.html">التقارير</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users-gear"></i><span>المستخدمون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="الموظفين.html">الموظفون</a>
+          <a href="العمال والاجور.html">العمال والأجور</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-gear"></i><span>الإدارة والإعدادات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="sales-offers.html">عروض المبيعات</a>
+          
+          
+          <a href="tax-settings.html">إعدادات الضريبة</a>
+          <a href="storage-settings.html">التخزين والأرشفة</a>
+          <a href="استيراد وتصدير ل كل قسم.html">النسخ الاحتياطي</a>
+          <a href="setting.html">إعدادات النظام</a>
+          <a href="printer-settings.html">إعدادات الطابعة</a>
+        </div>
+      </details>
+    </nav>
+
+    <button class="ct-sidebar-logout" type="button" data-ct-action="logout"><i class="fa-solid fa-right-from-bracket"></i><span>خروج</span></button>
+  </aside>
+
+  <section class="ct-main-wrapper">
+    <header class="ct-topbar">
+      <div class="ct-topbar-start">
+        <button class="ct-icon-button" type="button" data-ct-action="open-sidebar" aria-label="فتح القائمة"><i class="fa-solid fa-bars"></i></button>
+        <img class="ct-topbar-logo" src="cashtop-logo.png" alt="كاش توب 2">
+        <div class="ct-title-block">
+          <strong id="ctPageTitle">كاش توب</strong>
+          <small id="ctCompanyTitle">نظام المحاسبة والمخزون</small>
+        </div>
+      </div>
+      <div class="ct-topbar-actions">
+        <span class="ct-net-status" id="ctNetStatus"><i class="fa-solid fa-circle"></i><span>متصل</span></span>
+        <button class="ct-icon-button" id="ctSyncButton" type="button" data-ct-action="sync" title="مزامنة البيانات"><i class="fa-solid fa-rotate"></i></button>
+        <div class="ct-user-chip"><i class="fa-solid fa-user-shield"></i><span id="ctCurrentUser">مستخدم</span></div>
+        <button class="ct-icon-button ct-logout-top" type="button" data-ct-action="logout" title="خروج"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </header>
+
+    <main class="ct-page-host" id="ctPageHost"><div class="ct-original-page" id="ctOriginalPage">
+<div id="toast-container"></div>
+<div id="productSuggestionsPortal" class="sr-autocomplete product-suggestions sr-product-portal" aria-label="اقتراحات المنتجات"></div>
+<div class="sales-return-page">
+  <h2 class="sr-page-title"><i class="fa-solid fa-undo"></i><span id="returnPageHeading">إنشاء فاتورة مرتجع مبيعات</span></h2>
+
+  <section class="sr-card">
+    <div class="sr-grid-2">
+      <div class="sr-field">
+        <label>اسم العميل <span class="sr-required">*</span></label>
+        <div class="sr-input-wrap">
+          <i class="fa-solid fa-user"></i>
+          <input id="customerName" class="sr-input with-icon" autocomplete="off" placeholder="ابحث أو اكتب اسم العميل...">
+          <div id="customerSuggestions" class="sr-autocomplete"></div>
+        </div>
+      </div>
+      <div class="sr-field">
+        <label>إرجاع المبلغ من / إضافة إلى <span class="sr-required">*</span></label>
+        <div class="custom-dropdown" id="sourceDropdownContainer">
+          <input type="hidden" id="returnSource" value="customer_balance">
+          <button type="button" class="dropdown-btn"><span class="selected-text"><i class="fa-solid fa-wallet"></i> إضافة إلى رصيد العميل</span><i class="fa-solid fa-chevron-down" style="font-size:10px;color:#94a3b8"></i></button>
+          <div class="dropdown-options hidden" id="sourceOptions"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sr-card sr-products-card">
+    <div class="sr-products-head">
+      <h3><i class="fa-solid fa-boxes-stacked"></i> الأصناف المرتجعة</h3>
+      <div class="sr-total-chip"><span>الإجمالي:</span><strong id="totalReturns">0.00 ₪</strong></div>
+    </div>
+    <div class="sr-table-wrap">
+      <table class="sr-table">
+        <thead><tr><th style="width:42px;text-align:center">#</th><th style="width:34%">اسم الصنف المرتجع</th><th style="width:100px">الكمية</th><th style="width:150px">نوع الوحدة</th><th style="width:130px">سعر الإرجاع</th><th style="width:120px">الإجمالي</th><th style="width:52px;text-align:center">حذف</th></tr></thead>
+        <tbody id="returnsBody"></tbody>
+      </table>
+    </div>
+    <button type="button" class="sr-add-row" onclick="addReturnRow()"><i class="fa-solid fa-plus"></i> إضافة صنف مرتجع</button>
+    <div class="sr-actions"><button id="mainSaveBtn" class="sr-save" type="button" onclick="saveReturnInvoice()"><i class="fa-solid fa-check"></i><span>حفظ وترحيل المرتجع</span></button></div>
+  </section>
+
+  <section class="sr-card sr-log-card">
+    <div class="sr-log-head"><h3><i class="fa-solid fa-clock-rotate-left"></i> سجل مرتجعات المبيعات</h3><span class="sr-badge" id="returnsCount">0 مرتجع</span></div>
+    <div class="sr-table-wrap"><table class="sr-log-table"><thead><tr><th>رقم المرجع</th><th>الوقت</th><th>العميل</th><th>جهة الإرجاع</th><th>الإجمالي</th><th style="text-align:center">الإجراءات</th></tr></thead><tbody id="logBody"></tbody></table></div>
+  </section>
+</div>
+
+<div id="viewModal" class="sr-modal" onclick="if(event.target===this)closeViewModal()"><div class="sr-modal-box">
+  <div class="sr-modal-head"><h3><i class="fa-solid fa-file-invoice" style="color:#2563eb"></i> تفاصيل مرتجع المبيعات <span id="viewModalInvId" class="sr-badge"></span></h3><button class="sr-close" onclick="closeViewModal()"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="sr-modal-info"><div><small>اسم العميل</small><strong id="viewModalCustomer"></strong></div><div><small>وقت الإرجاع</small><strong id="viewModalDate"></strong></div><div><small>جهة الإرجاع</small><strong id="viewModalSource"></strong></div></div>
+  <div class="sr-modal-body"><div class="sr-table-wrap"><table class="sr-table" style="min-width:620px"><thead><tr><th>#</th><th>الصنف</th><th>الكمية</th><th>الوحدة</th><th>السعر</th><th>الإجمالي</th></tr></thead><tbody id="viewModalItemsBody"></tbody></table></div></div>
+  <div class="sr-modal-foot"><button class="sr-cancel" onclick="closeViewModal()">إغلاق</button><div><span style="font-size:12px;color:#64748b;font-weight:800">إجمالي الفاتورة: </span><span class="sr-modal-total" id="viewModalTotal">0.00 ₪</span></div></div>
+</div></div>
+
+<div id="deleteModal" class="sr-modal" onclick="if(event.target===this)closeDeleteModal()"><div class="sr-modal-box" style="max-width:430px">
+  <div class="sr-modal-head" style="background:#fef2f2;border-color:#fee2e2"><h3><i class="fa-solid fa-triangle-exclamation" style="color:#ef4444"></i> حذف مرتجع المبيعات</h3><button class="sr-close" onclick="closeDeleteModal()"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="sr-modal-body" style="line-height:1.8;color:#475569;font-size:13px">سيتم عكس الحركة بالكامل: <strong>يُخصم المخزون المرتجع مرة أخرى</strong>، ويُعاد المبلغ إلى طرق الدفع إذا كان قد سُحب منها، أو يُخصم من رصيد العميل إذا كان قد أضيف إليه.</div>
+  <div class="sr-modal-foot"><button class="sr-cancel" onclick="closeDeleteModal()">تراجع</button><button class="sr-danger" onclick="confirmDeleteSalesReturn()"><i class="fa-solid fa-trash"></i> حذف وعكس القيد</button></div>
+</div></div>
+
+<script>
+'use strict';
+let productsData=[]; let customersData=[]; let fundsDB={accounts:[],accountLogs:[]}; let salesReturnsData=[]; let branchesData=[];
+let selectedCustomer=null; let editingReturnId=null; let pendingDeleteId=null; let rowSequence=0; let activeProductSuggestionRow=null;
+const SALES_RETURN_MULTI_PAYMENT_VALUE='__MULTI_PAYMENT__'; let salesReturnMultiPayments=[];
+const session=window.Cashtop?.getSession?.()||{}; const activeBranchId=session.dataBranchId||session.branchId||'MAIN';
+function readArray(key){try{const v=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(v)?v:[]}catch(_){return[]}}
+function readObject(key,fallback={}){try{const v=JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback));return v&&typeof v==='object'&&!Array.isArray(v)?v:JSON.parse(JSON.stringify(fallback))}catch(_){return JSON.parse(JSON.stringify(fallback))}}
+function clone(v){return JSON.parse(JSON.stringify(v))}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function num(v){const n=Number(v);return Number.isFinite(n)?n:0}
+function roundQty(v){return Number(num(v).toFixed(6))}
+function money(v){return num(v).toFixed(2)}
+function currencyCfg(){return window.CashtopMulti?.getCurrencyConfig?.()||{baseCurrencyId:'ILS',base:{id:'ILS',symbol:'₪',code:'ILS'},currencies:[]}}
+function baseSymbol(){const c=currencyCfg().base;return c?.symbol||c?.code||'₪'}
+function showToast(message,type='success'){const host=document.getElementById('toast-container');const t=document.createElement('div');t.className=`sr-toast ${type}`;const icon=type==='error'?'fa-circle-exclamation':type==='info'?'fa-circle-info':'fa-circle-check';t.innerHTML=`<i class="fa-solid ${icon}"></i><span>${esc(message)}</span>`;host.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),220)},2800)}
+function loadData(){productsData=readArray('cashtop_products');customersData=readArray('cashtop_customers');fundsDB=readObject('cashtop_funds_db',{accounts:[],accountLogs:[]});if(!Array.isArray(fundsDB.accounts))fundsDB.accounts=[];if(!Array.isArray(fundsDB.accountLogs))fundsDB.accountLogs=[];salesReturnsData=readArray('cashtop_sales_returns');branchesData=readArray('cashtop_branches')}
+function isMainBranch(id){const normalized=String(id||'MAIN').trim().toUpperCase();if(!id||normalized==='MAIN')return true;const branch=branchesData.find(b=>String(b.id)===String(id));if(branch?.isMain===true)return true;return !branchesData.some(b=>b?.isMain===true)&&String(branchesData[0]?.id||'')===String(id)}
+function productChain(product){return window.CashtopMulti?.normalizeProductChain?.(product)||[{id:'piece',name:product?.pieceName||'قطعة',factorToBase:1,salePrice:num(product?.pricePiece||product?.price)}]}
+function configuredUnit(product,variantIndex=''){const chain=productChain(product);if(product?.addType==='unit'&&chain.length>1)return chain[chain.length-1];return chain[0]}
+function activeFunds(){const rows=(fundsDB.accounts||[]).filter(a=>window.Cashtop?.isFundActive?window.Cashtop.isFundActive(a):(a?.disabled!==true&&a?.active!==false&&String(a?.status||'').toLowerCase()!=='inactive'));return window.Cashtop?.sortFundAccountsForDropdown?.(rows)||rows}
+function renderSourceOptions(){const host=document.getElementById('sourceOptions'),accounts=activeFunds();let html=`<div class="dropdown-item" data-source="customer_balance"><i class="fa-solid fa-wallet"></i><div><strong>إضافة إلى رصيد العميل</strong></div></div>`;if(accounts.length>1)html+=`<div class="dropdown-item" data-source="${SALES_RETURN_MULTI_PAYMENT_VALUE}"><i class="fa-solid fa-layer-group"></i><div><strong>دفع متعدد</strong><div style="font-size:10px;color:#94a3b8">توزيع المبلغ المرتجع على أكثر من طريقة دفع</div></div></div>`;accounts.forEach(a=>{const cur=window.CashtopMulti?.getCurrency?.(a.currencyId||currencyCfg().baseCurrencyId)||currencyCfg().base;html+=`<div class="dropdown-item" data-source="${esc(a.id)}"><i class="fa-solid ${String(a.type||'').includes('بنك')?'fa-building-columns':'fa-cash-register'}"></i><div><strong>${esc(a.name)}</strong><div style="font-size:10px;color:#94a3b8">الرصيد ${money(a.balance)} ${esc(cur.symbol||cur.code||'')}</div></div></div>`});host.innerHTML=html}
+function openSalesReturnMultiPayment(){const total=calculateTotals();if(!(total>0)){showToast('أضف أصناف المرتجع أولاً ثم اختر دفع متعدد.','info');return false}const cfg=currencyCfg();return window.CashtopMulti?.openMultiPayment?.({title:'رد متعدد للعميل',accounts:activeFunds(),transactionCurrencyId:cfg.baseCurrencyId,direction:'out',requireExact:true,exactTransactionAmount:total,initialSplits:salesReturnMultiPayments,defaultTransactionAmount:salesReturnMultiPayments.length?0:total,onSave:splits=>{salesReturnMultiPayments=splits.map(x=>({...x}));const hidden=document.getElementById('returnSource'),label=document.querySelector('#sourceDropdownContainer .selected-text');hidden.value=SALES_RETURN_MULTI_PAYMENT_VALUE;label.innerHTML='<i class="fa-solid fa-layer-group"></i> دفع متعدد';}})}
+function setSource(value){const hidden=document.getElementById('returnSource');const label=document.querySelector('#sourceDropdownContainer .selected-text');if(String(value)==='customer_balance'){salesReturnMultiPayments=[];hidden.value='customer_balance';label.innerHTML='<i class="fa-solid fa-wallet"></i> إضافة إلى رصيد العميل';return}if(String(value)===SALES_RETURN_MULTI_PAYMENT_VALUE){if(!openSalesReturnMultiPayment())setSource('customer_balance');return}salesReturnMultiPayments=[];const account=fundsDB.accounts.find(a=>String(a.id)===String(value));if(!account){setSource('customer_balance');return}hidden.value=String(account.id);label.innerHTML=`<i class="fa-solid fa-cash-register"></i> طريقة الدفع: ${esc(account.name)}`}
+function closeDropdowns(except=null){document.querySelectorAll('.dropdown-options').forEach(el=>{if(el!==except)el.classList.add('hidden')})}
+function normalizeText(v){return String(v||'').trim().toLocaleLowerCase('ar').normalize('NFKD').replace(/[\u064B-\u065F\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,' ')}
+function resolveCustomerByTypedName(){const q=normalizeText(document.getElementById('customerName').value);if(!q){selectedCustomer=null;return null}const found=customersData.find(c=>normalizeText(c.name)===q)||null;if(found)selectedCustomer=found;return found}
+function renderCustomerSuggestions(){const input=document.getElementById('customerName');const box=document.getElementById('customerSuggestions');const q=normalizeText(input.value);selectedCustomer=null;if(!q){box.classList.remove('show');box.innerHTML='';return}const matches=customersData.filter(c=>normalizeText(c.name).includes(q)||String(c.phone||'').includes(q)).slice(0,10);box.innerHTML=matches.length?matches.map(c=>`<button type="button" class="sr-suggestion" data-customer-id="${esc(c.id)}"><span>${esc(c.name)}</span><small>${esc(c.phone||'')}</small></button>`).join(''):'<div style="padding:12px;text-align:center;color:#94a3b8;font-size:11px">لا يوجد عميل مطابق</div>';box.classList.add('show')}
+function chooseCustomer(id){const c=customersData.find(x=>String(x.id)===String(id));if(!c)return;selectedCustomer=c;document.getElementById('customerName').value=c.name;document.getElementById('customerSuggestions').classList.remove('show')}
+function productChoices(query){const q=normalizeText(query);const out=[];for(let productIndex=0;productIndex<productsData.length;productIndex++){const p=productsData[productIndex]||{};if(p.deleted===true||p.active===false||p.disabled===true)continue;const productName=String(p.name||p.productName||p.title||'').trim();if(!productName)continue;const baseText=`${productName} ${p.barcode||''} ${p.pieceBarcode||''} ${p.unitBarcode||''} ${p.sku||p.code||''}`;if(p.hasVariants&&Array.isArray(p.variants)&&p.variants.length){p.variants.forEach((v,i)=>{const label=`${productName}${v.size?' - '+v.size:''}${v.color?' - '+v.color:''}`;const hay=`${baseText} ${label} ${v.barcode||''}`;if(!q||normalizeText(hay).includes(q))out.push({product:p,productIndex,variantIndex:i,label})})}else if(!q||normalizeText(baseText).includes(q))out.push({product:p,productIndex,variantIndex:'',label:productName});if(out.length>=20)break}return out.slice(0,20)}
+function hideProductSuggestions(){const box=document.getElementById('productSuggestionsPortal');if(box){box.classList.remove('show');box.innerHTML=''}activeProductSuggestionRow=null}
+function positionProductSuggestions(input){const box=document.getElementById('productSuggestionsPortal');if(!box||!input)return;const r=input.getBoundingClientRect();const margin=8;const width=Math.min(Math.max(r.width,280),Math.max(280,window.innerWidth-margin*2));const left=Math.max(margin,Math.min(r.left,window.innerWidth-width-margin));const top=r.bottom+4;box.style.width=`${width}px`;box.style.left=`${left}px`;box.style.right='auto';box.style.top=`${top}px`;box.style.maxHeight=`${Math.max(150,Math.min(320,window.innerHeight-top-margin))}px`}
+function renderProductSuggestions(input){loadData();const row=input.closest('.item-row');const box=document.getElementById('productSuggestionsPortal');if(!row||!box)return;activeProductSuggestionRow=row;const rows=productChoices(input.value);box.innerHTML=rows.length?rows.map(x=>{const unit=configuredUnit(x.product,x.variantIndex);const pid=x.product.id??`__idx_${x.productIndex}`;return `<button type="button" class="sr-suggestion" data-product-id="${esc(pid)}" data-product-index="${x.productIndex}" data-variant-index="${x.variantIndex}"><span>${esc(x.label)}</span><small>${esc(unit?.name||'قطعة')} · ${money(unit?.salePrice??x.product.pricePiece??x.product.price)} ${baseSymbol()}</small></button>`}).join(''):'<div style="padding:12px;text-align:center;color:#94a3b8;font-size:11px">لا يوجد صنف مطابق</div>';positionProductSuggestions(input);box.classList.add('show')}
+function setRowUnit(row,unit,product=null){const chosen=unit||{id:'piece',name:'قطعة',factorToBase:1};row.dataset.unitId=chosen.id||'piece';row.dataset.unitName=chosen.name||'قطعة';row.dataset.factorToBase=String(Math.max(.000001,num(chosen.factorToBase)||1));const hidden=row.querySelector('.unit-input');hidden.value=row.dataset.unitId;const text=row.querySelector('.unit-dropdown .selected-text');text.innerHTML=`<i class="fa-solid fa-box"></i> ${esc(row.dataset.unitName)}`;const list=row.querySelector('.unit-dropdown .dropdown-options');const chain=product?productChain(product):[chosen];list.innerHTML=chain.map(level=>`<div class="dropdown-item" data-return-unit="${esc(level.id||'piece')}" data-return-factor="${Math.max(.000001,num(level.factorToBase)||1)}"><i class="fa-solid fa-box"></i><div><strong>${esc(level.name||'قطعة')}</strong><div style="font-size:9px;color:#94a3b8">${money(level.salePrice??product?.pricePiece??product?.price)} ${baseSymbol()}</div></div></div>`).join('')}
+function selectReturnUnit(row,unitId){const product=productsData.find(p=>String(p.id)===String(row.dataset.productId))||productsData[Number(row.dataset.productIndex)];if(!product)return;const chain=productChain(product);const level=chain.find(x=>String(x.id)===String(unitId))||chain[0]||configuredUnit(product,row.dataset.variantIndex||'');setRowUnit(row,level,product);row.querySelector('.price-input').value=money(level?.salePrice??product.pricePiece??product.price);calculateTotals()}
+function selectProduct(row,productId,variantIndex='',productIndex=''){const product=productsData.find(p=>String(p.id)===String(productId))||productsData[Number(productIndex)];if(!product)return;const unit=configuredUnit(product,variantIndex);let label=product.name||'منتج';if(variantIndex!==''&&product.variants?.[Number(variantIndex)]){const v=product.variants[Number(variantIndex)];label+=`${v.size?' - '+v.size:''}${v.color?' - '+v.color:''}`}row.dataset.productId=String(product.id??`__idx_${Number(productIndex)}`);row.dataset.productIndex=String(Number.isFinite(Number(productIndex))?Number(productIndex):productsData.indexOf(product));row.dataset.variantIndex=String(variantIndex);row.dataset.costPerPiece=String(num(product.cost||product.costPerPiece));row.querySelector('.item-name').value=label;row.querySelector('.price-input').value=money(unit?.salePrice??product.pricePiece??product.price);setRowUnit(row,unit,product);hideProductSuggestions();calculateTotals()}
+function addReturnRow(data=null){rowSequence++;const tr=document.createElement('tr');tr.className='item-row';tr.innerHTML=`<td class="sr-row-index">#</td><td><div class="sr-input-wrap"><input class="sr-input item-name" autocomplete="off" placeholder="اسم الصنف..."></div></td><td><input type="number" class="sr-number qty-input" min="0.000001" step="any" value="1" style="text-align:center"></td><td><div class="custom-dropdown unit-dropdown"><input type="hidden" class="unit-input"><button type="button" class="dropdown-btn"><span class="selected-text"><i class="fa-solid fa-box"></i> وحدة</span><i class="fa-solid fa-chevron-down" style="font-size:10px;color:#94a3b8"></i></button><div class="dropdown-options hidden"></div></div></td><td><div style="position:relative"><input type="number" class="sr-number price-input" min="0" step="any" value="0" style="text-align:left;padding-left:26px"><span style="position:absolute;left:9px;top:12px;color:#94a3b8;font-size:10px">${baseSymbol()}</span></div></td><td class="sr-row-total"><span>0.00</span> ${baseSymbol()}</td><td style="text-align:center"><button type="button" class="sr-delete-row" title="حذف الصنف"><i class="fa-solid fa-trash"></i></button></td>`;document.getElementById('returnsBody').appendChild(tr);if(data){tr.dataset.productId=String(data.productId||data.id||'');tr.dataset.productIndex=String(data.productIndex??productsData.findIndex(p=>String(p.id)===String(data.productId||data.id||'')));tr.dataset.variantIndex=String(data.variantIndex??'');tr.dataset.costPerPiece=String(num(data.costPerPiece));tr.querySelector('.item-name').value=data.name||'';tr.querySelector('.qty-input').value=data.qty||1;tr.querySelector('.price-input').value=num(data.price).toFixed(2);const product=productsData.find(p=>String(p.id)===String(tr.dataset.productId))||productsData[Number(tr.dataset.productIndex)];const chain=product?productChain(product):[];const saved=chain.find(level=>String(level.id)===String(data.unitId))||{id:data.unitId||'piece',name:data.unitName||'قطعة',factorToBase:num(data.factorToBase)||1,salePrice:num(data.price)};setRowUnit(tr,saved,product)}updateIndices();calculateTotals();return tr}
+function updateIndices(){document.querySelectorAll('#returnsBody .item-row').forEach((r,i)=>r.querySelector('.sr-row-index').textContent=i+1)}
+function calculateTotals(){let total=0;document.querySelectorAll('#returnsBody .item-row').forEach(row=>{const qty=Math.max(0,num(row.querySelector('.qty-input').value));const price=Math.max(0,num(row.querySelector('.price-input').value));const v=qty*price;row.querySelector('.sr-row-total span').textContent=money(v);total+=v});document.getElementById('totalReturns').textContent=`${money(total)} ${baseSymbol()}`;return Number(total.toFixed(2))}
+function collectItems(){const items=[];for(const row of document.querySelectorAll('#returnsBody .item-row')){const productId=row.dataset.productId;if(!productId)continue;const qty=Math.max(0,num(row.querySelector('.qty-input').value));const price=Math.max(0,num(row.querySelector('.price-input').value));if(!(qty>0))continue;items.push({productId,id:productId,productIndex:Number(row.dataset.productIndex||-1),variantIndex:row.dataset.variantIndex===''?null:Number(row.dataset.variantIndex),name:row.querySelector('.item-name').value.trim(),qty,unitId:row.dataset.unitId||'piece',unitName:row.dataset.unitName||'قطعة',factorToBase:Math.max(.000001,num(row.dataset.factorToBase)||1),price,costPerPiece:Math.max(0,num(row.dataset.costPerPiece)),rowTotal:Number((qty*price).toFixed(2))})}return items}
+function currentStock(product,item){if(product?.untrackedStock===true)return Infinity;if(item.variantIndex!=null&&product?.variants?.[item.variantIndex])return num(product.variants[item.variantIndex].qty);return num(product.stockPieces)}
+function changeStock(item,direction){const product=productsData.find(p=>String(p.id)===String(item.productId))||productsData[Number(item.productIndex)];if(!product||product.untrackedStock===true)return;const pieces=roundQty(num(item.qty)*Math.max(.000001,num(item.factorToBase)||1));const main=isMainBranch(activeBranchId);if(item.variantIndex!=null&&product.variants?.[item.variantIndex]){const v=product.variants[item.variantIndex];v.qty=roundQty(num(v.qty)+direction*num(item.qty));product.stockPieces=roundQty(num(product.stockPieces)+direction*pieces);if(!main){v.branchStocks=v.branchStocks&&typeof v.branchStocks==='object'?v.branchStocks:{};v.branchStocks[activeBranchId]=v.qty;product.branchStocks=product.branchStocks&&typeof product.branchStocks==='object'?product.branchStocks:{};product.branchStocks[activeBranchId]=product.stockPieces}else if(product.branchStocks&&Object.prototype.hasOwnProperty.call(product.branchStocks,'MAIN'))delete product.branchStocks.MAIN;return}product.stockPieces=roundQty(num(product.stockPieces)+direction*pieces);if(!main){product.branchStocks=product.branchStocks&&typeof product.branchStocks==='object'?product.branchStocks:{};product.branchStocks[activeBranchId]=product.stockPieces}else if(product.branchStocks&&Object.prototype.hasOwnProperty.call(product.branchStocks,'MAIN'))delete product.branchStocks.MAIN}
+function validateReverseStock(record){for(const item of record.items||[]){const product=productsData.find(p=>String(p.id)===String(item.productId||item.id))||productsData[Number(item.productIndex)];if(!product||product.untrackedStock===true)continue;const needed=item.variantIndex!=null?num(item.qty):num(item.qty)*Math.max(.000001,num(item.factorToBase)||1);if(currentStock(product,item)+1e-9<needed)return `لا يمكن عكس المرتجع للصنف [${item.name}] لأن الكمية الحالية في المخزون أقل من الكمية التي أُعيدت.`}return''}
+function customerForRecord(record){return customersData.find(c=>String(c.id)===String(record.customerId))||customersData.find(c=>normalizeText(c.name)===normalizeText(record.customerName))||null}
+function applyReturnEffect(record,direction,reason='save'){(record.items||[]).forEach(item=>changeStock(item,direction));if(record.sourceType==='customer_balance'){const customer=customerForRecord(record);if(!customer)throw new Error('العميل المرتبط بالمرتجع غير موجود.');customer.balance=num(customer.balance)+direction*num(record.totalValue);customer.debtInvoices=Array.isArray(customer.debtInvoices)?customer.debtInvoices:[];const entryId=`SRET_BAL_${record.id}`;customer.debtInvoices=customer.debtInvoices.filter(x=>String(x.id)!==entryId);if(direction>0)customer.debtInvoices.push({id:entryId,type:'sales-return-credit',source:'sales-return',refId:record.id,amount:num(record.totalValue),remaining:num(record.totalValue),date:record.date,notes:`إضافة مرتجع مبيعات ${record.id} إلى رصيد العميل`});return}const payments=Array.isArray(record.payments)&&record.payments.length?record.payments:null;if(payments){payments.forEach((payment,index)=>{const account=fundsDB.accounts.find(a=>String(a.id)===String(payment.accountId));if(!account)throw new Error(`طريقة الدفع [${payment.accountName||payment.accountId}] غير موجودة.`);const native=Math.max(0,num(payment.accountAmount));account.balance=num(account.balance)+(direction>0?-native:native);fundsDB.accountLogs.push({id:`LOG_SRET_${direction>0?'OUT':'REV'}_${record.id}_${index}_${Date.now()}`,sourceType:direction>0?'salesReturn':'salesReturn-reversal',sourceId:record.id,accountId:account.id,date:new Date().toISOString(),type:direction>0?'سحب':'إيداع',amount:native,baseAmount:num(payment.baseAmount),currencyId:payment.accountCurrencyId||account.currencyId||currencyCfg().baseCurrencyId,notes:direction>0?`رد مبلغ مرتجع مبيعات [${record.id}] للعميل ${record.customerName}`:`عكس حركة مرتجع مبيعات [${record.id}] بسبب ${reason==='edit'?'التعديل':'الحذف'}`})});return}const account=fundsDB.accounts.find(a=>String(a.id)===String(record.accountId));if(!account)throw new Error('طريقة الدفع المرتبطة بالمرتجع غير موجودة.');const native=Math.max(0,num(record.accountAmountNative));account.balance=num(account.balance)+(direction>0?-native:native);fundsDB.accountLogs.push({id:`LOG_SRET_${direction>0?'OUT':'REV'}_${record.id}_${Date.now()}_${Math.random().toString(36).slice(2,5)}`,sourceType:direction>0?'salesReturn':'salesReturn-reversal',sourceId:record.id,accountId:account.id,date:new Date().toISOString(),type:direction>0?'سحب':'إيداع',amount:native,baseAmount:num(record.totalValue),currencyId:record.accountCurrencyId||account.currencyId||currencyCfg().baseCurrencyId,notes:direction>0?`رد مبلغ مرتجع مبيعات [${record.id}] للعميل ${record.customerName}`:`عكس حركة مرتجع مبيعات [${record.id}] بسبب ${reason==='edit'?'التعديل':'الحذف'}`})}
+function buildRecord(id=null,createdAt=null){const customerName=document.getElementById('customerName').value.trim();if(!customerName)throw new Error('يرجى اختيار أو كتابة اسم العميل.');let customer=selectedCustomer||resolveCustomerByTypedName();const source=document.getElementById('returnSource').value;const items=collectItems();const total=calculateTotals();if(!items.length||!(total>0))throw new Error('لا يمكن حفظ مرتجع بدون أصناف وكميات ومبالغ صحيحة.');if(source==='customer_balance'&&!customer)throw new Error('عند اختيار إضافة إلى رصيد العميل يجب اختيار العميل من الاقتراحات.');const now=new Date().toISOString();const isMulti=source===SALES_RETURN_MULTI_PAYMENT_VALUE;const record={id:id||`SRET_${Date.now()}_${Math.random().toString(36).slice(2,5)}`,date:now,createdAt:createdAt||now,updatedAt:now,branchId:activeBranchId,customerId:customer?.id||null,customerName:customer?.name||customerName,sourceType:source==='customer_balance'?'customer_balance':'fund',totalValue:total,items,employeeName:session.displayName||session.username||'مستخدم',user:session.displayName||session.username||'مستخدم'};if(record.sourceType==='fund'&&isMulti){const payments=salesReturnMultiPayments.map(x=>({...x})),sum=payments.reduce((a,x)=>a+num(x.baseAmount),0);if(!payments.length||Math.abs(sum-total)>0.01)throw new Error('توزيع الدفع المتعدد لا يساوي قيمة المرتجع.');const insufficient=payments.find(payment=>{const a=fundsDB.accounts.find(x=>String(x.id)===String(payment.accountId));return !a||num(a.balance)+1e-9<num(payment.accountAmount)});if(insufficient)throw new Error(`رصيد طريقة الدفع [${insufficient.accountName||'المحددة'}] غير كافٍ.`);record.accountId=SALES_RETURN_MULTI_PAYMENT_VALUE;record.accountName='دفع متعدد';record.paymentMethod='دفع متعدد';record.payments=payments;record.sourceText='دفع متعدد'}else if(record.sourceType==='fund'){const account=fundsDB.accounts.find(a=>String(a.id)===String(source));if(!account)throw new Error('يرجى اختيار طريقة دفع صحيحة.');const native=window.CashtopMulti?.accountAmountFromBase?.(total,account)??total;if(num(account.balance)+1e-9<num(native))throw new Error(`رصيد طريقة الدفع [${account.name}] غير كافٍ.`);record.accountId=account.id;record.accountName=account.name;record.accountCurrencyId=account.currencyId||currencyCfg().baseCurrencyId;record.accountAmountNative=native;record.sourceText=`طريقة الدفع: ${account.name}`}else record.sourceText='إضافة إلى رصيد العميل';return record}
+function persist(label){const changes={cashtop_products:productsData,cashtop_customers:customersData,cashtop_funds_db:fundsDB,cashtop_sales_returns:salesReturnsData};if(window.Cashtop?.atomicSetItems)window.Cashtop.atomicSetItems(changes,{label});else Object.entries(changes).forEach(([k,v])=>localStorage.setItem(k,JSON.stringify(v)));window.dispatchEvent(new CustomEvent('cashtop:sync-now',{detail:{reason:label}}))}
+function restoreSnapshot(snapshot){Object.entries(snapshot).forEach(([k,v])=>{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v)});loadData();renderSourceOptions();renderLog()}
+function saveReturnInvoice(){const neededPermission=editingReturnId?'sales.edit':'sales.create';if(window.Cashtop?.can&&!window.Cashtop.can(neededPermission)){showToast(editingReturnId?'لا تملك صلاحية تعديل مرتجعات المبيعات.':'لا تملك صلاحية إنشاء مرتجع مبيعات.','error');return}const keys=['cashtop_products','cashtop_customers','cashtop_funds_db','cashtop_sales_returns'];const snapshot=Object.fromEntries(keys.map(k=>[k,localStorage.getItem(k)]));try{loadData();const old=editingReturnId?salesReturnsData.find(r=>String(r.id)===String(editingReturnId)):null;if(old){const stockError=validateReverseStock(old);if(stockError)throw new Error(stockError);applyReturnEffect(old,-1,'edit');salesReturnsData=salesReturnsData.filter(r=>String(r.id)!==String(old.id))}const record=buildRecord(old?.id||null,old?.createdAt||null);applyReturnEffect(record,+1,'save');salesReturnsData.push(record);persist(old?'edit-sales-return':'save-sales-return');showToast(old?'تم عكس الحركة السابقة وتطبيق التعديل الجديد بنجاح.':'تم حفظ وترحيل مرتجع المبيعات بنجاح.');resetForm();loadData();renderSourceOptions();renderLog()}catch(error){console.error(error);restoreSnapshot(snapshot);showToast(error?.message||'تعذر حفظ المرتجع وتم التراجع عن التغييرات.','error')}}
+function resetForm(){hideProductSuggestions();editingReturnId=null;selectedCustomer=null;salesReturnMultiPayments=[];document.getElementById('customerName').value='';document.getElementById('returnsBody').innerHTML='';addReturnRow();setSource('customer_balance');document.getElementById('returnPageHeading').textContent='إنشاء فاتورة مرتجع مبيعات';const btn=document.getElementById('mainSaveBtn');btn.classList.remove('editing');btn.innerHTML='<i class="fa-solid fa-check"></i><span>حفظ وترحيل المرتجع</span>';window.scrollTo({top:0,behavior:'smooth'})}
+function editSalesReturn(id){if(window.Cashtop?.can&&!window.Cashtop.can('sales.edit')){showToast('لا تملك صلاحية تعديل مرتجعات المبيعات.','error');return}loadData();const r=salesReturnsData.find(x=>String(x.id)===String(id));if(!r)return;editingReturnId=r.id;selectedCustomer=customersData.find(c=>String(c.id)===String(r.customerId))||null;document.getElementById('customerName').value=r.customerName||'';if(r.sourceType==='fund'&&Array.isArray(r.payments)&&r.payments.length){salesReturnMultiPayments=r.payments.map(x=>({...x}));const hidden=document.getElementById('returnSource'),label=document.querySelector('#sourceDropdownContainer .selected-text');hidden.value=SALES_RETURN_MULTI_PAYMENT_VALUE;label.innerHTML='<i class="fa-solid fa-layer-group"></i> دفع متعدد';}else setSource(r.sourceType==='customer_balance'?'customer_balance':r.accountId);document.getElementById('returnsBody').innerHTML='';(r.items||[]).forEach(item=>addReturnRow(item));if(!(r.items||[]).length)addReturnRow();document.getElementById('returnPageHeading').textContent=`تعديل مرتجع ${r.id}`;const btn=document.getElementById('mainSaveBtn');btn.classList.add('editing');btn.innerHTML='<i class="fa-solid fa-rotate"></i><span>عكس الحركة وحفظ التعديل</span>';window.scrollTo({top:0,behavior:'smooth'});showToast('تم تحميل المرتجع. عند الحفظ سيتم عكس القيد القديم ثم تطبيق القيم الجديدة.','info')}
+function openDeleteSalesReturn(id){if(window.Cashtop?.can&&!window.Cashtop.can('sales.delete')){showToast('لا تملك صلاحية حذف مرتجعات المبيعات.','error');return}pendingDeleteId=id;document.getElementById('deleteModal').classList.add('show')}function closeDeleteModal(){pendingDeleteId=null;document.getElementById('deleteModal').classList.remove('show')}
+function confirmDeleteSalesReturn(){if(!pendingDeleteId)return;const keys=['cashtop_products','cashtop_customers','cashtop_funds_db','cashtop_sales_returns'];const snapshot=Object.fromEntries(keys.map(k=>[k,localStorage.getItem(k)]));try{loadData();const r=salesReturnsData.find(x=>String(x.id)===String(pendingDeleteId));if(!r)throw new Error('المرتجع غير موجود.');const stockError=validateReverseStock(r);if(stockError)throw new Error(stockError);applyReturnEffect(r,-1,'delete');salesReturnsData=salesReturnsData.filter(x=>String(x.id)!==String(r.id));persist('delete-sales-return');if(String(editingReturnId)===String(r.id))resetForm();showToast('تم حذف المرتجع وعكس الصندوق/رصيد العميل والمخزون بالكامل.');closeDeleteModal();loadData();renderSourceOptions();renderLog()}catch(error){console.error(error);restoreSnapshot(snapshot);closeDeleteModal();showToast(error?.message||'تعذر حذف المرتجع وتم التراجع عن التغييرات.','error')}}
+function renderLog(){const body=document.getElementById('logBody');const rows=salesReturnsData.slice().sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));document.getElementById('returnsCount').textContent=`${rows.length} مرتجع`;const createRow=r=>{const tr=document.createElement('tr');tr.innerHTML=`<td style="font-weight:800;color:#1e40af">${esc(r.id)}</td><td style="color:#64748b">${esc(new Date(r.date).toLocaleString('ar-EG'))}</td><td style="font-weight:800">${esc(r.customerName)}</td><td><span class="sr-source-tag">${esc(r.sourceText||r.accountName||'رصيد العميل')}</span></td><td style="font-weight:900;color:#dc2626">${money(r.totalValue)} ${baseSymbol()}</td><td><div class="sr-log-actions"><button class="sr-icon-btn sr-view" onclick="viewSalesReturn('${esc(r.id)}')" title="عرض"><i class="fa-solid fa-eye"></i></button><button class="sr-icon-btn sr-edit" onclick="editSalesReturn('${esc(r.id)}')" title="تعديل"><i class="fa-solid fa-pen"></i></button><button class="sr-icon-btn sr-del" onclick="openDeleteSalesReturn('${esc(r.id)}')" title="حذف"><i class="fa-solid fa-trash"></i></button></div></td>`;return tr};if(window.Cashtop?.renderVirtualRows)window.Cashtop.renderVirtualRows(body,rows,createRow,{chunkSize:80,eagerLimit:150,windowThreshold:300,windowSize:180,rowHeight:54,colspan:6,emptyHtml:'<tr><td colspan="6" class="sr-empty">لا توجد مرتجعات مبيعات مسجلة حتى الآن...</td></tr>'});else{body.innerHTML='';if(!rows.length)body.innerHTML='<tr><td colspan="6" class="sr-empty">لا توجد مرتجعات مبيعات مسجلة حتى الآن...</td></tr>';else rows.slice(0,300).forEach(r=>body.appendChild(createRow(r)))}}
+function viewSalesReturn(id){const r=salesReturnsData.find(x=>String(x.id)===String(id));if(!r)return;document.getElementById('viewModalInvId').textContent=r.id;document.getElementById('viewModalCustomer').textContent=r.customerName||'-';document.getElementById('viewModalDate').textContent=new Date(r.date).toLocaleString('ar-EG');document.getElementById('viewModalSource').textContent=r.sourceText||r.accountName||'رصيد العميل';document.getElementById('viewModalTotal').textContent=`${money(r.totalValue)} ${baseSymbol()}`;document.getElementById('viewModalItemsBody').innerHTML=(r.items||[]).map((item,i)=>`<tr><td>${i+1}</td><td style="font-weight:800">${esc(item.name)}</td><td>${esc(item.qty)}</td><td>${esc(item.unitName)}</td><td>${money(item.price)} ${baseSymbol()}</td><td style="font-weight:800;color:#dc2626">${money(item.rowTotal)} ${baseSymbol()}</td></tr>`).join('');document.getElementById('viewModal').classList.add('show')}function closeViewModal(){document.getElementById('viewModal').classList.remove('show')}
+async function initSalesReturns(){if(window.Cashtop?.localReady&&typeof window.Cashtop.localReady.then==='function'){try{await window.Cashtop.localReady}catch(_){}}loadData();renderSourceOptions();setSource('customer_balance');addReturnRow();renderLog();document.getElementById('customerName').addEventListener('input',renderCustomerSuggestions);document.getElementById('customerName').addEventListener('blur',()=>setTimeout(resolveCustomerByTypedName,120));document.addEventListener('focusin',e=>{if(e.target.classList?.contains('item-name'))renderProductSuggestions(e.target)});document.addEventListener('input',e=>{if(e.target.classList.contains('item-name')){const row=e.target.closest('.item-row');row.dataset.productId='';renderProductSuggestions(e.target)}if(e.target.classList.contains('qty-input')||e.target.classList.contains('price-input'))calculateTotals()});document.addEventListener('click',e=>{const customerBtn=e.target.closest('[data-customer-id]');if(customerBtn){chooseCustomer(customerBtn.dataset.customerId);return}const prodBtn=e.target.closest('[data-product-id]');if(prodBtn&&prodBtn.closest('#productSuggestionsPortal')){if(activeProductSuggestionRow)selectProduct(activeProductSuggestionRow,prodBtn.dataset.productId,prodBtn.dataset.variantIndex,prodBtn.dataset.productIndex);return}const del=e.target.closest('.sr-delete-row');if(del){del.closest('.item-row').remove();if(!document.querySelector('#returnsBody .item-row'))addReturnRow();updateIndices();calculateTotals();return}const dropdownBtn=e.target.closest('.dropdown-btn');if(dropdownBtn){const menu=dropdownBtn.parentElement.querySelector('.dropdown-options');closeDropdowns(menu);menu.classList.toggle('hidden');return}const unitOption=e.target.closest('[data-return-unit]');if(unitOption){const row=unitOption.closest('.item-row');if(row)selectReturnUnit(row,unitOption.dataset.returnUnit);unitOption.closest('.dropdown-options')?.classList.add('hidden');return}const source=e.target.closest('[data-source]');if(source){setSource(source.dataset.source);source.closest('.dropdown-options').classList.add('hidden');return}if(!e.target.closest('.custom-dropdown'))closeDropdowns();if(!e.target.closest('#customerName')&&!e.target.closest('#customerSuggestions'))document.getElementById('customerSuggestions').classList.remove('show');if(!e.target.closest('#productSuggestionsPortal')&&!e.target.classList.contains('item-name'))hideProductSuggestions()});window.addEventListener('cashtop:remote-applied',event=>{if(['cashtop_products','cashtop_customers','cashtop_funds_db','cashtop_sales_returns'].includes(event.detail?.key)&&!editingReturnId){loadData();renderSourceOptions();renderLog()}});window.addEventListener('cashtop:durable-restored',()=>{loadData();renderSourceOptions();renderLog()});window.addEventListener('resize',hideProductSuggestions,{passive:true});window.addEventListener('scroll',hideProductSuggestions,{passive:true,capture:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initSalesReturns);else initSalesReturns();
+</script>
+</div></main>
+
+    <nav class="ct-bottom-nav" aria-label="التنقل السريع">
+      <a href="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+      <a href="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+      <a href="products.html"><i class="fa-solid fa-box-open"></i><span>المنتجات</span></a>
+      <a href="customers.html"><i class="fa-solid fa-users"></i><span>العملاء</span></a>
+      <a href="invoices.html"><i class="fa-solid fa-file-invoice"></i><span>الفواتير</span></a>
+    </nav>
+  </section>
+</div>
+
+<script type="application/json" id="ctEmbeddedShellMarker">{"embedded":true,"page":"مرجع المبيعات.html"}</script>
+<script src="cashtop-export.js"></script>
+</body>
+
+</html>
+

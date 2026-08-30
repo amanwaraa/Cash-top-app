@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<title>إعدادات الضريبة - كاش توب 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" href="icon-192.png"><link rel="stylesheet" href="cashtop-core.css?v=125">
+<script src="cashtop-core.js?v=126"></script>
+    <script src="multi-system.js?v=100"></script><script src="activation-runtime.js?v=500"></script><script src="turso-config.js?v=500"></script><script src="turso-rtdb.js?v=101"></script><script src="accounting-engine.js?v=100"></script><script src="turso-sync.js?v=127"></script>
+
+<style>
+*{box-sizing:border-box}body{font-family:'Cairo',sans-serif}.ct-feature-page{max-width:1400px;margin:auto;display:grid;gap:16px}.ct-feature-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.ct-feature-card{background:#fff;border-radius:10px;padding:16px;border-top:3px solid #605ca8;box-shadow:0 2px 9px rgba(15,23,42,.06)}.ct-feature-card strong{font-size:22px;display:block;margin-top:6px}.ct-feature-panel{background:#fff;border-radius:10px;padding:18px;box-shadow:0 2px 9px rgba(15,23,42,.06)}.ct-feature-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.ct-btn{border:0;border-radius:8px;padding:10px 15px;font:700 12px 'Cairo';cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none}.ct-btn-primary{background:#605ca8;color:#fff}.ct-btn-success{background:#00a65a;color:#fff}.ct-btn-light{background:#f8fafc;color:#475569;border:1px solid #dbe1e8}.ct-btn-danger{background:#fff0ef;color:#c23321;border:1px solid #f2bbb6}.ct-table-wrap{overflow:auto}.ct-table{width:100%;border-collapse:collapse;min-width:760px;font-size:12px;text-align:center}.ct-table th{background:#f8fafc;padding:11px;border-bottom:2px solid #e2e8f0}.ct-table td{padding:11px;border-bottom:1px solid #edf0f3}.ct-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.ct-form-group{display:flex;flex-direction:column;gap:6px}.ct-form-group label{font-size:11px;font-weight:800;color:#475569}.ct-input{width:100%;min-height:42px;padding:9px 12px;border:1px solid #d7dce4;border-radius:9px;font:600 12px 'Cairo';outline:none}.ct-input:focus{border-color:#605ca8;box-shadow:0 0 0 3px rgba(96,92,168,.13)}.ct-modal{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:3600;display:none;align-items:center;justify-content:center;padding:12px}.ct-modal.open{display:flex}.ct-modal-box{background:#fff;width:min(760px,96vw);max-height:92vh;overflow:auto;border-radius:12px;padding:20px;border-top:4px solid #605ca8}.ct-modal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #edf0f3;padding-bottom:12px;margin-bottom:16px}.ct-modal-head button{border:0;background:none;font-size:24px;cursor:pointer}.ct-badge{display:inline-flex;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:800}.ct-badge-success{background:#e6f7ed;color:#008d4c}.ct-badge-warning{background:#fff6df;color:#b26b00}.ct-badge-danger{background:#fff0ef;color:#c23321}@media(max-width:768px){.ct-feature-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.ct-form-grid{grid-template-columns:1fr}.ct-feature-panel{padding:12px}}
+</style><script src="cashtop-download-fix.js"></script>
+</head><body>
+<div class="ct-sidebar-overlay" id="ctSidebarOverlay" data-ct-action="close-sidebar"></div>
+<div class="ct-app-shell"><aside class="ct-sidebar" id="ctSidebar" aria-label="القائمة الجانبية">
+<div class="ct-sidebar-brand"><img src="cashtop-logo.png" alt="كاش توب 2"><strong>كاش توب 2</strong><small id="ctSidebarCompany">كاش توب</small></div>
+<nav class="ct-sidebar-nav">
+<a class="ct-menu-link" href="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>لوحة التحكم</span></a>
+<a class="ct-menu-link" href="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+<details class="ct-menu-group"><summary><i class="fa-solid fa-boxes-stacked"></i><span>المخزون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary><div class="ct-submenu"><a href="products.html">المنتجات</a><a href="materials.html">الأصناف</a><a href="warehouses.html">المخازن</a><a href="branches.html">الفروع</a><a href="units.html">الوحدات</a><a href="shortages.html">النواقص</a><a href="barcode-generator.html">الباركود</a><a href="ادارة التصنيع.html">التصنيع</a></div></details>
+<details class="ct-menu-group"><summary><i class="fa-solid fa-file-invoice-dollar"></i><span>الفواتير</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary><div class="ct-submenu"><a href="invoices.html">فواتير المبيعات</a><a href="مرجع المبيعات.html">مرتجع المبيعات</a><a href="المشتريات.html">المشتريات</a><a href="مرجع المشتريات.html">مرتجع المشتريات</a></div></details>
+<details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users"></i><span>العملاء والموردون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="customers.html">العملاء</a>
+          <a href="customer-groups.html">مجموعات العملاء</a>
+          <a href="suppliers.html">الموردون</a>
+          <a href="المناديب.html">المناديب</a>
+        </div>
+      </details>
+<details class="ct-menu-group"><summary><i class="fa-solid fa-wallet"></i><span>الحسابات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary><div class="ct-submenu"><a href="accounts.html">الصناديق والحسابات</a><a href="journal.html">دفتر الأستاذ</a><a href="sands.html">سندات القبض والصرف</a><a href="المصاريف.html">المصاريف</a><a href="التقارير.html">التقارير</a></div></details>
+<details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users-gear"></i><span>المستخدمون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="الموظفين.html">الموظفون</a>
+          <a href="العمال والاجور.html">العمال والأجور</a>
+        </div>
+      </details>
+<details class="ct-menu-group">
+        <summary><i class="fa-solid fa-gear"></i><span>الإدارة والإعدادات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="sales-offers.html">عروض المبيعات</a>
+          
+          
+          <a href="tax-settings.html">إعدادات الضريبة</a>
+          <a href="storage-settings.html">التخزين والأرشفة</a>
+          <a href="استيراد وتصدير ل كل قسم.html">النسخ الاحتياطي</a>
+          <a href="setting.html">إعدادات النظام</a>
+          <a href="printer-settings.html">إعدادات الطابعة</a>
+        </div>
+      </details>
+</nav><button class="ct-sidebar-logout" type="button" data-ct-action="logout"><i class="fa-solid fa-right-from-bracket"></i><span>خروج</span></button></aside>
+<section class="ct-main-wrapper"><header class="ct-topbar"><div class="ct-topbar-start"><button class="ct-icon-button" type="button" data-ct-action="open-sidebar"><i class="fa-solid fa-bars"></i></button><div class="ct-title-block"><strong id="ctPageTitle">كاش توب</strong><small id="ctCompanyTitle">نظام المحاسبة والمخزون</small></div></div><div class="ct-topbar-actions"><span class="ct-net-status" id="ctNetStatus"><i class="fa-solid fa-circle"></i><span>متصل</span></span><button class="ct-icon-button" id="ctSyncButton" type="button" data-ct-action="sync"><i class="fa-solid fa-rotate"></i></button><div class="ct-user-chip"><i class="fa-solid fa-user-shield"></i><span id="ctCurrentUser">مستخدم</span></div><button class="ct-icon-button ct-logout-top" type="button" data-ct-action="logout"><i class="fa-solid fa-right-from-bracket"></i></button></div></header>
+<main class="ct-page-host" id="ctPageHost"><div class="ct-original-page" id="ctOriginalPage">
+<style>
+.tax-manager{font-family:'Cairo',sans-serif;color:#1e293b;max-width:1400px;margin:0 auto;padding:4px}
+.tax-manager *{box-sizing:border-box}
+.tax-manager-header{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;background:#fff;padding:20px;border-radius:16px;box-shadow:0 1px 4px rgba(15,23,42,.06);margin-bottom:24px;border:1px solid #f1f5f9;gap:16px}
+.tax-manager-title{display:flex;align-items:center;gap:14px}.tax-back-btn{width:40px;height:40px;border:0;background:#f8fafc;color:#64748b;border-radius:9px;display:grid;place-items:center;cursor:pointer;transition:.16s}.tax-back-btn:hover{background:#e2e8f0}.tax-manager-title h1{font-size:24px;font-weight:900;color:#1e293b;margin:0;letter-spacing:-.02em}
+.tax-add-btn{width:100%;border:0;background:#2563eb;color:#fff;padding:11px 22px;border-radius:12px;cursor:pointer;font:800 13px Cairo;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 5px 12px rgba(37,99,235,.18);transition:.16s}.tax-add-btn:hover{background:#1d4ed8;transform:translateY(-1px)}
+.tax-grid{display:grid;grid-template-columns:1fr;gap:18px}.tax-card{background:#fff;border-radius:22px;box-shadow:0 2px 7px rgba(15,23,42,.05);border:1px solid #e2e8f0;overflow:hidden;transition:.18s;display:flex;flex-direction:column}.tax-card:hover{box-shadow:0 7px 19px rgba(15,23,42,.08);transform:translateY(-1px)}
+.tax-card-head{padding:22px 22px 14px;display:flex;justify-content:space-between;align-items:flex-start}.tax-card-name{font-size:16px;font-weight:900;color:#1e293b;margin:0}.tax-status{display:inline-block;padding:4px 11px;background:#ecfdf5;color:#059669;font-size:10px;font-weight:900;border-radius:999px;margin-top:7px;border:1px solid #d1fae5}.tax-card-actions{display:flex;gap:7px}.tax-card-action{width:33px;height:33px;border-radius:999px;border:0;background:#f8fafc;color:#64748b;cursor:pointer;display:grid;place-items:center;transition:.15s}.tax-card-action.edit:hover{background:#eff6ff;color:#2563eb}.tax-card-action.delete:hover{background:#fff1f2;color:#ef4444}
+.tax-rate-big{padding:18px 22px 28px;flex:1;display:flex;align-items:center;justify-content:center;font:900 44px Arial,sans-serif;color:#10b981;direction:ltr}.tax-examples{background:#f8fafc;border-top:1px solid #f1f5f9;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);text-align:center}.tax-example{padding:0 8px;border-left:1px solid #e2e8f0}.tax-example:last-child{border-left:0}.tax-example span{display:block;color:#94a3b8;font-size:9px;font-weight:900;margin-bottom:3px}.tax-example b{font:800 12px Arial,sans-serif;color:#334155}
+.tax-empty{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 20px;color:#94a3b8;text-align:center}.tax-empty i{font-size:56px;margin-bottom:14px;color:#e2e8f0}.tax-empty strong{font-size:16px;color:#64748b}.tax-empty small{font-size:11px;margin-top:5px}
+.tax-modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;z-index:17000;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px);opacity:0;transition:opacity .18s ease-out}.tax-modal-overlay.open{display:flex}.tax-modal-overlay.active{opacity:1}.tax-modal-box{background:#fff;border-radius:24px;width:min(440px,96vw);box-shadow:0 28px 80px rgba(15,23,42,.3);overflow:hidden;display:flex;flex-direction:column;transform:scale(.96);opacity:0;transition:transform .18s cubic-bezier(.4,0,.2,1),opacity .18s ease-out}.tax-modal-box.active{transform:scale(1);opacity:1}
+.tax-modal-head{padding:20px 22px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center;background:#fafafa}.tax-modal-title-wrap{display:flex;align-items:center;gap:11px}.tax-modal-icon{width:39px;height:39px;border-radius:999px;background:#dbeafe;color:#2563eb;display:grid;place-items:center}.tax-modal-head h3{font-size:17px;font-weight:900;color:#1e293b;margin:0}.tax-close{width:31px;height:31px;border:0;border-radius:999px;background:transparent;color:#94a3b8;cursor:pointer;display:grid;place-items:center}.tax-close:hover{background:#fff1f2;color:#ef4444}
+.tax-modal-body{padding:22px;display:grid;gap:17px}.tax-section-title{font-size:12px;font-weight:900;color:#2563eb;display:flex;align-items:center;gap:7px}.tax-field label{display:block;font-size:11px;font-weight:900;color:#334155;margin-bottom:7px}.tax-input-wrap{position:relative}.tax-input-wrap i{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:#94a3b8;pointer-events:none}.tax-input{width:100%;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:11px 37px 11px 13px;outline:none;font:800 12px Cairo;color:#1e293b;transition:.15s}.tax-input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.12)}.tax-error{font-size:10px;color:#ef4444;margin-top:5px;display:none}.tax-error.show{display:block}.tax-help{background:#eff6ff;border:1px solid #dbeafe;border-radius:12px;padding:13px;display:flex;gap:10px;color:#1e40af;font-size:10px;font-weight:700;line-height:1.8}.tax-help i{color:#3b82f6;font-size:16px;margin-top:2px}
+.tax-modal-footer{padding:18px 22px;border-top:1px solid #f1f5f9;background:#fafafa;display:flex;justify-content:flex-end;gap:9px}.tax-btn-cancel,.tax-btn-save{border:0;border-radius:11px;padding:10px 20px;font:900 12px Cairo;cursor:pointer}.tax-btn-cancel{background:transparent;color:#64748b}.tax-btn-cancel:hover{background:#e2e8f0}.tax-btn-save{background:#2563eb;color:#fff;box-shadow:0 4px 10px rgba(37,99,235,.17)}.tax-btn-save:hover{background:#1d4ed8}
+.tax-delete-box{width:min(390px,94vw);text-align:center;padding:22px}.tax-delete-icon{width:64px;height:64px;border-radius:999px;background:#fff1f2;color:#ef4444;display:grid;place-items:center;font-size:28px;margin:0 auto 13px;border:4px solid #ffe4e6}.tax-delete-box h3{font-size:18px;font-weight:900;margin:0 0 6px}.tax-delete-box p{font-size:11px;color:#64748b;font-weight:700;line-height:1.8;margin:0 0 18px}.tax-delete-actions{display:flex;gap:9px}.tax-delete-actions button{flex:1;border:0;border-radius:11px;padding:10px;font:900 12px Cairo;cursor:pointer}.tax-delete-cancel{background:#f1f5f9;color:#334155}.tax-delete-confirm{background:#ef4444;color:#fff}
+@media(min-width:640px){.tax-manager-header{flex-direction:row;align-items:center}.tax-add-btn{width:auto}.tax-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1180px){.tax-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){.tax-manager{padding:0}.tax-manager-header{padding:15px;border-radius:13px;margin-bottom:14px}.tax-manager-title h1{font-size:19px}.tax-grid{gap:12px}.tax-card{border-radius:17px}.tax-card-head{padding:17px 17px 10px}.tax-rate-big{font-size:38px;padding:12px 17px 22px}.tax-examples{padding:11px 6px}.tax-modal-body{padding:18px}.tax-modal-head,.tax-modal-footer{padding:16px 18px}}
+</style>
+<div class="tax-manager">
+  <header class="tax-manager-header">
+    <div class="tax-manager-title">
+      <button type="button" class="tax-back-btn" onclick="history.back()" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+      <h1>إدارة معدلات الضرائب</h1>
+    </div>
+    <button type="button" class="tax-add-btn" onclick="openModal()"><i class="fa-solid fa-plus"></i> إضافة معدل ضريبي</button>
+  </header>
+  <section id="taxes-container" class="tax-grid"></section>
+</div>
+
+<div id="tax-modal" class="tax-modal-overlay" onclick="if(event.target===this) closeModal()">
+  <div id="tax-modal-content" class="tax-modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="tax-modal-head">
+      <div class="tax-modal-title-wrap"><div class="tax-modal-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div><h3 id="modal-title">إضافة معدل ضريبة جديد</h3></div>
+      <button type="button" class="tax-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="tax-modal-body">
+      <div class="tax-section-title"><i class="fa-solid fa-circle-info"></i> معلومات معدل الضريبة</div>
+      <div class="tax-field">
+        <label>اسم معدل الضريبة <span style="color:#ef4444">*</span></label>
+        <div class="tax-input-wrap"><i class="fa-solid fa-tag"></i><input type="text" id="tax-name" class="tax-input" placeholder="مثال: ضريبة القيمة المضافة" autocomplete="off"></div>
+        <div id="name-error" class="tax-error">يرجى إدخال اسم الضريبة</div>
+      </div>
+      <div class="tax-field">
+        <label>المعدل (%) <span style="color:#ef4444">*</span></label>
+        <div class="tax-input-wrap"><i class="fa-solid fa-percent"></i><input type="number" id="tax-rate" class="tax-input" placeholder="0.00" min="0" max="100" step="0.01" dir="ltr"></div>
+        <div id="rate-error" class="tax-error">يرجى إدخال نسبة صحيحة من 0 إلى 100</div>
+      </div>
+      <div class="tax-help"><i class="fa-solid fa-lightbulb"></i><span>سيظهر هذا المعدل مباشرة ضمن خيارات الضريبة في الكاشير، ويمكن اختيار المعدل المناسب لكل فاتورة أو اختيار بدون ضريبة.</span></div>
+    </div>
+    <div class="tax-modal-footer"><button type="button" class="tax-btn-cancel" onclick="closeModal()">إلغاء</button><button type="button" class="tax-btn-save" onclick="saveTax()"><i class="fa-solid fa-floppy-disk"></i> حفظ</button></div>
+  </div>
+</div>
+
+<div id="delete-modal" class="tax-modal-overlay" onclick="if(event.target===this) closeDeleteModal()">
+  <div id="delete-modal-content" class="tax-modal-box tax-delete-box" role="dialog" aria-modal="true">
+    <div class="tax-delete-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <h3>تأكيد الحذف</h3>
+    <p>هل أنت متأكد من رغبتك في حذف هذا المعدل الضريبي؟ الفواتير القديمة ستحتفظ بقيمة الضريبة المسجلة فيها، لكن المعدل لن يظهر للاختيار في الفواتير الجديدة.</p>
+    <div class="tax-delete-actions"><button type="button" class="tax-delete-cancel" onclick="closeDeleteModal()">إلغاء</button><button type="button" class="tax-delete-confirm" onclick="confirmDelete()">نعم، احذف</button></div>
+  </div>
+</div>
+
+<script>
+let taxes = [];
+let editingTaxId = null;
+let taxIdToDelete = null;
+let taxSettingsSnapshot = null;
+
+function taxEscape(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function normalizeTaxRateItem(item, index = 0) {
+  const rate = Math.max(0, Math.min(100, Number(item?.rate) || 0));
+  return { id: String(item?.id ?? ('tax_' + Date.now() + '_' + index)), name: String(item?.name || 'ضريبة').trim() || 'ضريبة', rate, active: item?.active !== false };
+}
+function loadTaxData() {
+  const cfg = window.Cashtop?.getTaxSettings?.() || {};
+  taxSettingsSnapshot = { ...cfg };
+  taxes = Array.isArray(cfg.rates) ? cfg.rates.map(normalizeTaxRateItem).filter(item => item.rate >= 0) : [];
+
+  // ترحيل إعدادات الضريبة القديمة مرة واحدة إلى قائمة المعدلات بدون فقدان التوافق.
+  if (!taxes.length && cfg.enabled) {
+    const sales = Math.max(0, Number(cfg.salesRate) || 0);
+    const purchase = Math.max(0, Number(cfg.purchaseRate) || 0);
+    if (sales > 0 && purchase > 0 && Math.abs(sales - purchase) > 0.000001) {
+      taxes = [
+        { id:'legacy_sales', name:'ضريبة المبيعات', rate:sales, active:true },
+        { id:'legacy_purchase', name:'ضريبة المشتريات', rate:purchase, active:true }
+      ];
+    } else if (Math.max(sales, purchase) > 0) {
+      taxes = [{ id:'legacy_default', name:'ضريبة القيمة المضافة', rate:Math.max(sales, purchase), active:true }];
+    }
+    if (taxes.length) persistTaxes(true);
+  }
+  renderTaxes();
+}
+function getTaxById(id) { return taxes.find(item => String(item.id) === String(id)); }
+function formatNumber(num) { return Number(num || 0).toLocaleString('en-US', { minimumFractionDigits:2, maximumFractionDigits:2 }); }
+function calculateExample(amount, rate) { return formatNumber(Number(amount || 0) + (Number(amount || 0) * (Number(rate || 0) / 100))); }
+function getCurrencySymbol() {
+  const cfg = window.CashtopMulti?.getCurrencyConfig?.() || {};
+  return cfg.base?.symbol || cfg.base?.code || '₪';
+}
+function renderTaxes() {
+  const container = document.getElementById('taxes-container');
+  if (!container) return;
+  if (!taxes.length) {
+    container.innerHTML = '<div class="tax-empty"><i class="fa-solid fa-file-invoice-dollar"></i><strong>لا توجد معدلات ضريبية</strong><small>اضغط على إضافة معدل ضريبي للبدء</small></div>';
+    return;
+  }
+  const symbol = taxEscape(getCurrencySymbol());
+  container.innerHTML = taxes.map(tax => `
+    <article class="tax-card">
+      <div class="tax-card-head">
+        <div><h3 class="tax-card-name">${taxEscape(tax.name)}</h3><span class="tax-status">مفعل</span></div>
+        <div class="tax-card-actions">
+          <button type="button" class="tax-card-action edit" onclick="openModal('${taxEscape(tax.id)}')" aria-label="تعديل"><i class="fa-solid fa-pen"></i></button>
+          <button type="button" class="tax-card-action delete" onclick="openDeleteModal('${taxEscape(tax.id)}')" aria-label="حذف"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="tax-rate-big">${formatNumber(tax.rate)}%</div>
+      <div class="tax-examples">
+        <div class="tax-example"><span>المبلغ 100 ${symbol}</span><b>${calculateExample(100,tax.rate)} ${symbol}</b></div>
+        <div class="tax-example"><span>المبلغ 500 ${symbol}</span><b>${calculateExample(500,tax.rate)} ${symbol}</b></div>
+        <div class="tax-example"><span>المبلغ 1000 ${symbol}</span><b>${calculateExample(1000,tax.rate)} ${symbol}</b></div>
+      </div>
+    </article>`).join('');
+}
+function showTaxModal(modalId, contentId) {
+  const modal = document.getElementById(modalId), content = document.getElementById(contentId);
+  if (!modal || !content) return;
+  modal.classList.add('open');
+  requestAnimationFrame(() => { modal.classList.add('active'); content.classList.add('active'); });
+}
+function hideTaxModal(modalId, contentId, after) {
+  const modal = document.getElementById(modalId), content = document.getElementById(contentId);
+  if (!modal || !content) return;
+  modal.classList.remove('active'); content.classList.remove('active');
+  setTimeout(() => { modal.classList.remove('open'); if (typeof after === 'function') after(); }, 180);
+}
+function openModal(id = null) {
+  editingTaxId = id === null ? null : String(id);
+  document.getElementById('name-error')?.classList.remove('show');
+  document.getElementById('rate-error')?.classList.remove('show');
+  const tax = editingTaxId ? getTaxById(editingTaxId) : null;
+  document.getElementById('modal-title').textContent = tax ? 'تعديل معدل الضريبة' : 'إضافة معدل ضريبة جديد';
+  document.getElementById('tax-name').value = tax?.name || '';
+  document.getElementById('tax-rate').value = tax ? Number(tax.rate) : '';
+  showTaxModal('tax-modal','tax-modal-content');
+  setTimeout(() => document.getElementById('tax-name')?.focus(), 90);
+}
+function closeModal() { hideTaxModal('tax-modal','tax-modal-content', () => { editingTaxId = null; }); }
+function persistTaxes(silent = false) {
+  const previous = taxSettingsSnapshot || window.Cashtop?.getTaxSettings?.() || {};
+  const active = taxes.filter(item => item.active !== false);
+  const first = active[0] || null;
+  let defaultSalesTaxId = previous.defaultSalesTaxId && getTaxById(previous.defaultSalesTaxId) ? String(previous.defaultSalesTaxId) : (first?.id || null);
+  let defaultPurchaseTaxId = previous.defaultPurchaseTaxId && getTaxById(previous.defaultPurchaseTaxId) ? String(previous.defaultPurchaseTaxId) : (first?.id || null);
+  const salesDefault = getTaxById(defaultSalesTaxId) || first;
+  const purchaseDefault = getTaxById(defaultPurchaseTaxId) || first;
+  const next = {
+    ...previous,
+    enabled: active.length > 0,
+    rates: active.map(item => ({ id:String(item.id), name:item.name, rate:Number(item.rate), active:true })),
+    defaultSalesTaxId,
+    defaultPurchaseTaxId,
+    salesRate: Number(salesDefault?.rate || 0),
+    purchaseRate: Number(purchaseDefault?.rate || 0),
+    salesBearer: previous.salesBearer || 'customer',
+    purchaseBearer: previous.purchaseBearer || 'business',
+    pricesIncludeTax: Boolean(previous.pricesIncludeTax)
+  };
+  localStorage.setItem('cashtop_tax_settings', JSON.stringify(next));
+  taxSettingsSnapshot = next;
+  window.dispatchEvent(new CustomEvent('cashtop:tax-settings-changed', { detail: next }));
+  window.CashtopTurso?.syncAll?.().catch?.(error => console.warn('Tax settings sync:', error));
+  if (!silent) window.Cashtop?.showToast?.('تم حفظ معدلات الضرائب وتطبيقها في النظام','success');
+}
+function saveTax() {
+  const name = String(document.getElementById('tax-name')?.value || '').trim();
+  const rawRate = document.getElementById('tax-rate')?.value;
+  const rate = Number(rawRate);
+  let invalid = false;
+  if (!name) { document.getElementById('name-error')?.classList.add('show'); invalid = true; } else document.getElementById('name-error')?.classList.remove('show');
+  if (rawRate === '' || !Number.isFinite(rate) || rate < 0 || rate > 100) { document.getElementById('rate-error')?.classList.add('show'); invalid = true; } else document.getElementById('rate-error')?.classList.remove('show');
+  if (invalid) return;
+  const duplicate = taxes.find(item => item.name.trim().toLowerCase() === name.toLowerCase() && String(item.id) !== String(editingTaxId));
+  if (duplicate) { window.Cashtop?.showToast?.('يوجد معدل ضريبي بنفس الاسم','error'); return; }
+  if (editingTaxId) {
+    const tax = getTaxById(editingTaxId);
+    if (tax) { tax.name = name; tax.rate = rate; }
+  } else {
+    taxes.push({ id:'tax_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), name, rate, active:true });
+  }
+  persistTaxes(); renderTaxes(); closeModal();
+}
+function openDeleteModal(id) { taxIdToDelete = String(id); showTaxModal('delete-modal','delete-modal-content'); }
+function closeDeleteModal() { hideTaxModal('delete-modal','delete-modal-content', () => { taxIdToDelete = null; }); }
+function confirmDelete() {
+  if (taxIdToDelete === null) return;
+  taxes = taxes.filter(item => String(item.id) !== String(taxIdToDelete));
+  persistTaxes(); renderTaxes(); closeDeleteModal();
+}
+document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeModal(); closeDeleteModal(); } });
+window.addEventListener('load', loadTaxData);
+</script>
+</div></main><nav class="ct-bottom-nav" aria-label="التنقل السريع">
+      <a href="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+      <a href="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+      <a href="products.html"><i class="fa-solid fa-box-open"></i><span>المنتجات</span></a>
+      <a href="customers.html"><i class="fa-solid fa-users"></i><span>العملاء</span></a>
+      <a href="invoices.html"><i class="fa-solid fa-file-invoice"></i><span>الفواتير</span></a>
+    </nav></section></div></body></html>

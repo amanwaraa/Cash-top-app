@@ -1,0 +1,11 @@
+Cash Top R151 — Security / Activation / Sync adjustments
+
+- Activation files are now opaque Base64 blobs with no readable JSON labels such as format/encoding/keyHint.
+- New activation files use AES-256-GCM with PBKDF2-SHA-256 (210,000 iterations) and per-file salts/IVs.
+- Legacy v2 .ctkey files remain readable for compatibility.
+- The login page has no visible admin portal link.
+- The login security label now only says: بيانات الدخول آمنة جداً.
+- Admin console route/file names were made non-obvious: ct-secure-console-9f31c.html / ct-secure-runtime-9f31.js.
+- The master Turso configuration is kept only in local storage in an opaque representation and is not embedded as a DB credential in application source files.
+- file:// sync was repaired by routing the local RTDB bridge through a file URL intercepted by the in-app Turso bridge; this removes the previous "direct file" sync failure.
+- Existing local/offline queue and cloud reconciliation logic remains in place.

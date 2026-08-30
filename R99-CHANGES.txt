@@ -1,0 +1,9 @@
+CASH TOP R99
+
+- Product pictures are saved locally before any upload; IndexedDB is primary and Cache Storage is a durable fallback.
+- Offline or failed uploads stay in the image outbox and retry on online/focus/pageshow/connection changes plus watchdog retries.
+- Product data and the normal sync queue are persisted before image network work starts.
+- Uploaded image URL updates are queued for database sync before retrying Turso.
+- Product images use a guaranteed product-icon fallback when the remote/local image cannot be displayed.
+- Uploaded blobs are inserted into the persistent image cache immediately for offline display.
+- Cache First app shell bumped to R99 while preserving the local image outbox cache across Service Worker upgrades.

@@ -1,0 +1,6 @@
+CASH TOP R140
+- Added per-product low-stock threshold stored on every product and used by smart notifications.
+- Added product favorite priority: first favorite is first in Cashier, with persistent ordering.
+- Refreshed customer-group pricing from latest local data when a customer is selected and preserved zero-valued group prices.
+- Reworked the Receipt/Payment voucher payment-account selector to a native laptop-safe dropdown, while retaining multi-payment.
+- Improved product image rendering fallback/referrer handling for direct image URLs.

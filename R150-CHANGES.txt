@@ -1,0 +1,7 @@
+CASH TOP R150 — Offline-first laptop cache
+
+- PWA start_url now opens the locally cached login page instead of the server root.
+- Service Worker cache version bumped and keeps same-origin application HTML cache-first.
+- Service Worker claims existing PWA/browser tabs immediately on activation so offline navigation can be served from Cache Storage without waiting for remote assets.
+- Cached pages are still used even while online for fast opening; live Turso/API requests bypass Cache Storage.
+- Existing local data, sync logic and UI are unchanged.

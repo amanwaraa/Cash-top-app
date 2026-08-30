@@ -1,0 +1,6 @@
+R142 Favorite Local-First Fix
+- Product favorite add/remove is persisted to localStorage in cashtop_favorite_overrides.
+- Removing a star writes a null override immediately, so remote pulls cannot visually restore it before sync.
+- Favorite ranking changes are locally pinned and then uploaded through the existing atomic sync queue.
+- Products and cashier both re-apply local favorite overrides whenever cashtop_products is loaded, remotely applied, or updated by another page.
+- Cache query bumped to v=127 for cashtop-core.js references.

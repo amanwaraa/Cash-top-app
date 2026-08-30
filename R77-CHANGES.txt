@@ -1,0 +1,15 @@
+CASH TOP R77 — Financial Groups (built directly on R75)
+
+- R76 financial-period implementation is not included.
+- Adds financial groups/folders with the supplied three-column design.
+- Original R75 data becomes the first group without moving or deleting it.
+- Closing a group archives its period transactions by isolating that group; no historical invoices are deleted.
+- New group starts period sales/purchases/expenses/vouchers at zero.
+- Carries funds/banks, stock quantities, customer receivables and supplier payables as opening balances.
+- Net period profit/loss is carried as one capital/equity opening record.
+- Products/customers/suppliers/funds are cloned into the new group so opening balances are independent and old groups remain historical.
+- Employees/branches/settings and other shared master/config data stay available across groups.
+- Closed groups are read-only and switching groups uses a green professional toast.
+- Fine-grained employee permissions: view, switch, view closed, create/close.
+- Cache-first service worker preserved from R75; all pages including financial-groups.html are precached and open from cache even while online.
+- Turso sync remains economical: group list reads only its compact index; closing does the one-time balance refresh explicitly.

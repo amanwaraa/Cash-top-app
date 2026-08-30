@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+<title>المجموعات المالية - كاش توب 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" href="icon-192.png"><link rel="stylesheet" href="cashtop-core.css?v=125">
+<script src="cashtop-core.js?v=126"></script>
+    <script src="multi-system.js?v=100"></script><script src="activation-runtime.js?v=500"></script><script src="turso-config.js?v=500"></script><script src="turso-rtdb.js?v=101"></script><script src="accounting-engine.js?v=100"></script><script src="turso-sync.js?v=127"></script>
+
+<script src="cashtop-download-fix.js"></script>
+<style>
+:root{--primary:#5c4d96;--green:#27ae60;--bg-color:#f4f6f9;--text-main:#333;--border-color:#d1d5db;--folder-color:#f3ca3e;--danger:#c62828}
+#ctFinancialGroupsPage *{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',Tahoma,Arial,sans-serif}
+#ctFinancialGroupsPage{background:var(--bg-color);color:var(--text-main);padding:15px;min-height:calc(100vh - 70px)}
+#ctFinancialGroupsPage .container{max-width:1200px;margin:0 auto}
+#ctFinancialGroupsPage .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;background:white;padding:15px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+#ctFinancialGroupsPage .page-title{font-size:1.1rem;color:var(--primary);font-weight:bold;display:flex;align-items:center;gap:10px}
+#ctFinancialGroupsPage .page-title i{color:var(--folder-color);font-size:1.4rem}
+#ctFinancialGroupsPage .btn-add{background-color:var(--green);color:#fff;border:none;padding:10px 15px;border-radius:6px;cursor:pointer;font-weight:bold;font-size:.95rem;display:flex;align-items:center;gap:8px;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+#ctFinancialGroupsPage .form-section{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-right:4px solid var(--primary);margin-bottom:20px;display:none;animation:ctGroupSlideDown .3s ease-out}
+@keyframes ctGroupSlideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+#ctFinancialGroupsPage .form-header{margin-bottom:15px;font-size:1rem;border-bottom:1px solid #eee;padding-bottom:10px;color:var(--danger);font-weight:bold}
+#ctFinancialGroupsPage .input-group{position:relative;margin-top:10px;margin-bottom:15px}
+#ctFinancialGroupsPage .input-group label{position:absolute;top:-10px;right:15px;background:#fff;padding:0 5px;font-size:.85rem;color:#555;z-index:1}
+#ctFinancialGroupsPage .input-group input,#ctFinancialGroupsPage .input-group select{width:100%;padding:14px 15px;border:1px solid var(--border-color);border-radius:6px;font-size:1rem;outline:none;background:transparent}
+#ctFinancialGroupsPage .input-group input:focus{border-color:var(--primary)}
+#ctFinancialGroupsPage .checkbox-group{display:flex;align-items:center;gap:12px;padding:12px;background:#f8f9fa;border-radius:6px;border:1px dashed var(--primary)}
+#ctFinancialGroupsPage .checkbox-group input{width:20px;height:20px;accent-color:var(--primary);cursor:pointer}
+#ctFinancialGroupsPage .checkbox-group label{font-weight:bold;cursor:pointer;font-size:.9rem}
+#ctFinancialGroupsPage .btn-save{background-color:var(--primary);color:#fff;border:none;width:100%;padding:12px;font-size:1rem;font-weight:bold;border-radius:6px;cursor:pointer;margin-top:15px}
+#ctFinancialGroupsPage .folders-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+#ctFinancialGroupsPage .folder-card{background:#fff;border-radius:10px;padding:15px 10px;text-align:center;cursor:pointer;border:2px solid transparent;box-shadow:0 2px 5px rgba(0,0,0,.05);position:relative;transition:all .2s}
+#ctFinancialGroupsPage .folder-card.active-folder{border-color:var(--primary);background-color:#f8f6ff}
+#ctFinancialGroupsPage .folder-card.active-folder::before{content:'✓';font-family:'Cairo',sans-serif;font-weight:900;position:absolute;top:8px;left:9px;color:#fff;background:var(--primary);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.82rem;line-height:1;box-shadow:0 2px 6px rgba(92,77,150,.22)}
+#ctFinancialGroupsPage .folder-icon{width:64px;height:54px;color:var(--folder-color);margin:0 auto 10px;display:grid;place-items:center}
+#ctFinancialGroupsPage .folder-icon svg{width:100%;height:100%;display:block;fill:currentColor;stroke:currentColor}
+#ctFinancialGroupsPage .ct-inline-icon{width:1.2em;height:1.2em;display:inline-block;vertical-align:-.2em;fill:currentColor;stroke:currentColor;flex:0 0 auto}
+#ctFinancialGroupsPage .page-title .ct-inline-icon{color:var(--folder-color);width:1.5em;height:1.5em}
+#ctFinancialGroupsPage .btn-save .ct-inline-icon,#ctFinancialGroupsPage .btn-add .ct-inline-icon{width:1.1em;height:1.1em}
+#ctFinancialGroupsPage .folder-badge .ct-inline-icon{width:.85em;height:.85em;margin-left:3px}
+#ctFinancialGroupsPage .ct-group-spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;display:inline-block;animation:ctGroupSpin .75s linear infinite;vertical-align:-4px;margin-left:7px}
+@keyframes ctGroupSpin{to{transform:rotate(360deg)}}
+#ctFinancialGroupsPage .folder-card.active-folder .folder-icon{color:var(--primary)}
+#ctFinancialGroupsPage .folder-title{font-weight:bold;font-size:.95rem;margin-bottom:10px;color:#333;word-wrap:break-word}
+#ctFinancialGroupsPage .folder-badge{display:inline-block;padding:4px 8px;border-radius:12px;font-size:.75rem;font-weight:bold}
+#ctFinancialGroupsPage .badge-closed{background:#ffebee;color:var(--danger)}
+#ctFinancialGroupsPage .badge-open{background:#e8f5e9;color:var(--green)}
+@media(max-width:600px){#ctFinancialGroupsPage .folders-grid{gap:8px}#ctFinancialGroupsPage .folder-card{padding:10px 5px}#ctFinancialGroupsPage .folder-icon{width:48px;height:42px}#ctFinancialGroupsPage .folder-title{font-size:.8rem}#ctFinancialGroupsPage .folder-badge{font-size:.65rem;padding:3px 5px}#ctFinancialGroupsPage .page-title{font-size:.95rem}#ctFinancialGroupsPage .btn-add{padding:8px 10px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<div class="ct-sidebar-overlay" id="ctSidebarOverlay" data-ct-action="close-sidebar"></div>
+<div class="ct-app-shell"><aside class="ct-sidebar" id="ctSidebar" aria-label="القائمة الجانبية">
+<div class="ct-sidebar-brand"><img src="cashtop-logo.png" alt="كاش توب 2"><strong>كاش توب 2</strong><small id="ctSidebarCompany">كاش توب</small></div>
+<nav class="ct-sidebar-nav">
+<a class="ct-menu-link" href="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>لوحة التحكم</span></a>
+<a class="ct-menu-link" href="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+<details class="ct-menu-group"><summary><i class="fa-solid fa-boxes-stacked"></i><span>المخزون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary><div class="ct-submenu"><a href="products.html">المنتجات</a><a href="materials.html">الأصناف</a><a href="warehouses.html">المخازن</a><a href="branches.html">الفروع</a><a href="units.html">الوحدات</a><a href="shortages.html">النواقص</a><a href="barcode-generator.html">الباركود</a><a href="ادارة التصنيع.html">التصنيع</a></div></details>
+<details class="ct-menu-group"><summary><i class="fa-solid fa-file-invoice-dollar"></i><span>الفواتير</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary><div class="ct-submenu"><a href="invoices.html">فواتير المبيعات</a><a href="مرجع المبيعات.html">مرتجع المبيعات</a><a href="المشتريات.html">المشتريات</a><a href="مرجع المشتريات.html">مرتجع المشتريات</a></div></details>
+<details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users"></i><span>العملاء والموردون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="customers.html">العملاء</a>
+          <a href="customer-groups.html">مجموعات العملاء</a>
+          <a href="suppliers.html">الموردون</a>
+          <a href="المناديب.html">المناديب</a>
+        </div>
+      </details>
+<details class="ct-menu-group"><summary><i class="fa-solid fa-wallet"></i><span>الحسابات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary><div class="ct-submenu"><a href="accounts.html">الصناديق والحسابات</a><a href="journal.html">دفتر الأستاذ</a><a href="sands.html">سندات القبض والصرف</a><a href="المصاريف.html">المصاريف</a><a href="التقارير.html">التقارير</a></div></details>
+<details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users-gear"></i><span>المستخدمون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="الموظفين.html">الموظفون</a>
+          <a href="العمال والاجور.html">العمال والأجور</a>
+        </div>
+      </details>
+<details class="ct-menu-group">
+        <summary><i class="fa-solid fa-gear"></i><span>الإدارة والإعدادات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="sales-offers.html">عروض المبيعات</a>
+          
+          
+          <a href="tax-settings.html">إعدادات الضريبة</a>
+          <a href="storage-settings.html">التخزين والأرشفة</a>
+          <a href="استيراد وتصدير ل كل قسم.html">النسخ الاحتياطي</a>
+          <a href="setting.html">إعدادات النظام</a>
+          <a href="printer-settings.html">إعدادات الطابعة</a>
+        </div>
+      </details>
+</nav><button class="ct-sidebar-logout" type="button" data-ct-action="logout"><i class="fa-solid fa-right-from-bracket"></i><span>خروج</span></button></aside>
+<section class="ct-main-wrapper"><header class="ct-topbar"><div class="ct-topbar-start"><button class="ct-icon-button" type="button" data-ct-action="open-sidebar"><i class="fa-solid fa-bars"></i></button><div class="ct-title-block"><strong id="ctPageTitle">كاش توب</strong><small id="ctCompanyTitle">نظام المحاسبة والمخزون</small></div></div><div class="ct-topbar-actions"><span class="ct-net-status" id="ctNetStatus"><i class="fa-solid fa-circle"></i><span>متصل</span></span><button class="ct-icon-button" id="ctSyncButton" type="button" data-ct-action="sync"><i class="fa-solid fa-rotate"></i></button><div class="ct-user-chip"><i class="fa-solid fa-user-shield"></i><span id="ctCurrentUser">مستخدم</span></div><button class="ct-icon-button ct-logout-top" type="button" data-ct-action="logout"><i class="fa-solid fa-right-from-bracket"></i></button></div></header>
+<main class="ct-page-host" id="ctPageHost"><div class="ct-original-page" id="ctOriginalPage">
+<div id="ctFinancialGroupsPage"><div class="container">
+  <div class="page-header">
+    <div class="page-title"><svg class="ct-inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.75A2.75 2.75 0 0 1 5.75 3h4.1c.73 0 1.43.29 1.94.8l1.16 1.16c.23.23.54.36.87.36h4.43A2.75 2.75 0 0 1 21 8.07v8.18A2.75 2.75 0 0 1 18.25 19H5.75A2.75 2.75 0 0 1 3 16.25V5.75Z"/></svg>المجموعات المالية</div>
+    <button class="btn-add" id="addGroupBtn" onclick="toggleForm()"><svg class="ct-inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5a1 1 0 1 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5Z"/></svg> إضافة وإغلاق</button>
+  </div>
+  <div class="form-section" id="newGroupForm">
+    <div class="form-header"><svg class="ct-inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.25 3.6a2 2 0 0 1 3.5 0l8 14.5A2 2 0 0 1 20 21H4a2 2 0 0 1-1.75-2.9l8-14.5ZM12 8a1 1 0 0 0-1 1v5a1 1 0 1 0 2 0V9a1 1 0 0 0-1-1Zm0 9a1.15 1.15 0 1 0 0 2.3A1.15 1.15 0 0 0 12 17Z"/></svg> تنبيه: فتح مجموعة جديدة سيؤدي إلى إغلاق المجموعة الحالية نهائياً ولن تتمكن من التعديل عليها أو الحذف منها.</div>
+    <div class="input-group"><label>اسم المجموعة الجديدة</label><input type="text" id="newGroupName" placeholder="مثال: الربع الثالث 2026"></div>
+    <div class="input-group"><label>استيراد الإعدادات من</label><select id="importSettings"><option value="last">المجموعة السابقة (النشطة حالياً)</option><option value="none">بدون (بدء مجموعة فارغة تماماً)</option></select></div>
+    <div class="checkbox-group"><input type="checkbox" id="carryBalances" checked><label for="carryBalances">ترحيل الأرصدة النهائية (الصناديق، المخزون، الديون) كأرصدة افتتاحية</label></div>
+    <button class="btn-save" id="saveGroupBtn" onclick="saveNewGroup()"><svg class="ct-inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1.25A2.75 2.75 0 0 1 21 12.75v6.5A2.75 2.75 0 0 1 18.25 22H5.75A2.75 2.75 0 0 1 3 19.25v-6.5A2.75 2.75 0 0 1 5.75 10H7Zm2 0h6V8a3 3 0 1 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V19a.75.75 0 0 0 1.5 0v-2.2A1.5 1.5 0 0 0 12 14Z"/></svg> إغلاق القديم وفتح المجموعة الجديدة</button>
+  </div>
+  <div class="folders-grid" id="foldersContainer"></div>
+</div></div>
+<script>
+let financialGroups=[];
+let currentViewingId='';
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function loadFinancialGroups(){financialGroups=window.Cashtop?.getFinancialGroups?.()||[];currentViewingId=window.Cashtop?.currentFinancialGroupId?.()||financialGroups.find(g=>g.status==='active')?.id||'';renderFolders();const canCreate=window.Cashtop?.can?.('financialGroups.create')===true;const add=document.getElementById('addGroupBtn');if(add){add.hidden=!canCreate;add.disabled=!canCreate}}
+function folderSvg(opened=false){return opened?`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.2A2.2 2.2 0 0 1 5.2 5h4.18c.58 0 1.14.23 1.55.64l1.08 1.08c.22.22.52.34.83.34h5.96A2.2 2.2 0 0 1 21 9.26v.42H7.18a2.4 2.4 0 0 0-2.22 1.5L3 16.02V7.2Zm3.68 4.48c.18-.44.61-.73 1.08-.73H21l-2.14 6.2A2.7 2.7 0 0 1 16.3 19H5.02a1.72 1.72 0 0 1-1.6-2.36l3.26-4.96Z"/></svg>`:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.25A2.75 2.75 0 0 1 5.75 3.5h4.1c.73 0 1.43.29 1.94.8l1.16 1.16c.23.23.54.36.87.36h4.43A2.75 2.75 0 0 1 21 8.57v7.68A2.75 2.75 0 0 1 18.25 19H5.75A2.75 2.75 0 0 1 3 16.25v-10Z"/></svg>`}
+const lockSvg=`<svg class="ct-inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1.25A2.75 2.75 0 0 1 21 12.75v6.5A2.75 2.75 0 0 1 18.25 22H5.75A2.75 2.75 0 0 1 3 19.25v-6.5A2.75 2.75 0 0 1 5.75 10H7Zm2 0h6V8a3 3 0 1 0-6 0v2Z"/></svg>`;
+const saveButtonHtml=`<svg class="ct-inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2h1.25A2.75 2.75 0 0 1 21 12.75v6.5A2.75 2.75 0 0 1 18.25 22H5.75A2.75 2.75 0 0 1 3 19.25v-6.5A2.75 2.75 0 0 1 5.75 10H7Zm2 0h6V8a3 3 0 1 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V19a.75.75 0 0 0 1.5 0v-2.2A1.5 1.5 0 0 0 12 14Z"/></svg> إغلاق القديم وفتح المجموعة الجديدة`;
+function renderFolders(){const container=document.getElementById('foldersContainer');if(!container)return;container.innerHTML='';const canClosed=window.Cashtop?.can?.('financialGroups.viewClosed')===true;[...financialGroups].reverse().forEach(group=>{const isViewing=String(group.id)===String(currentViewingId);const isClosed=group.status==='closed';if(isClosed&&!canClosed)return;const card=document.createElement('div');card.className=isViewing?'folder-card active-folder':'folder-card';card.onclick=()=>selectGroup(group.id,group.name,isClosed);card.innerHTML=`<span class="folder-icon">${folderSvg(isViewing)}</span><div class="folder-title">${esc(group.name)}</div><span class="folder-badge ${isClosed?'badge-closed':'badge-open'}">${isClosed?lockSvg+' للقراءة فقط':'مفتوحة للعمل'}</span>`;container.appendChild(card)})}
+function toggleForm(){if(!window.Cashtop?.can?.('financialGroups.create'))return window.Cashtop?.showToast?.('لا تملك صلاحية إنشاء مجموعة مالية جديدة.','error');const form=document.getElementById('newGroupForm');form.style.display=(form.style.display==='none'||form.style.display==='')?'block':'none'}
+async function saveNewGroup(){const name=document.getElementById('newGroupName').value.trim();if(!name)return window.Cashtop?.showToast?.('الرجاء إدخال اسم المجموعة الجديدة.','error');const btn=document.getElementById('saveGroupBtn');btn.disabled=true;btn.innerHTML='<span class="ct-group-spin" aria-hidden="true"></span> جاري الإغلاق والترحيل...';try{const group=await window.Cashtop.createFinancialGroup({name,importSettings:document.getElementById('importSettings').value,carryBalances:document.getElementById('carryBalances').checked});document.getElementById('newGroupName').value='';financialGroups=window.Cashtop.getFinancialGroups();currentViewingId=group.id;renderFolders();document.getElementById('newGroupForm').style.display='none';window.Cashtop.showToast(`تم إنشاء المجموعة [${group.name}] وترحيل الأرصدة الافتتاحية بنجاح.`,'success',4200);setTimeout(()=>location.href='لوحة التحكم.html',120)}catch(error){window.Cashtop?.showToast?.(error?.message||'تعذر إنشاء المجموعة المالية.','error',5600)}finally{btn.disabled=false;btn.innerHTML=saveButtonHtml}}</script>
+<script>
+async function selectGroup(id,name,isClosed){try{if(isClosed&&!window.Cashtop?.can?.('financialGroups.viewClosed'))throw new Error('لا تملك صلاحية استعراض المجموعات المغلقة.');await window.Cashtop.selectFinancialGroup(id,{target:'لوحة التحكم.html'});}catch(error){window.Cashtop?.showToast?.(error?.message||'تعذر الانتقال إلى المجموعة.','error',4800)}}
+window.addEventListener('cashtop:remote-applied',e=>{if(e.detail?.key==='cashtop_financial_groups')loadFinancialGroups()});
+window.addEventListener('load',loadFinancialGroups);
+</script>
+</div></main><nav class="ct-bottom-nav" aria-label="التنقل السريع">
+      <a href="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+      <a href="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+      <a href="products.html"><i class="fa-solid fa-box-open"></i><span>المنتجات</span></a>
+      <a href="customers.html"><i class="fa-solid fa-users"></i><span>العملاء</span></a>
+      <a href="invoices.html"><i class="fa-solid fa-file-invoice"></i><span>الفواتير</span></a>
+    </nav></section></div></body></html>

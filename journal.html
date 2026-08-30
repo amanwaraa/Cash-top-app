@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>دفتر الأستاذ العام | CASH TOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="icon-192.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="cashtop-core.css?v=125">
+    <script src="cashtop-core.js?v=126"></script>
+    <script src="multi-system.js?v=100"></script><script src="activation-runtime.js?v=500"></script><script src="turso-config.js?v=500"></script><script src="turso-rtdb.js?v=101"></script><script src="accounting-engine.js?v=100"></script><script src="turso-sync.js?v=127"></script>
+  <style>
+    .ledger-page{font-family:'Cairo',sans-serif;color:#333;padding:10px;background:#f4f7f6;min-height:calc(100vh - 70px);--primary-color:#2c3e50;--secondary-color:#34495e;--btn-green:#27ae60;--btn-blue:#2980b9;--btn-red:#c0392b;--debit-color:#27ae60;--credit-color:#c0392b;--usd-color:#2980b9;--text-muted:#7f8c8d}
+    .ledger-container{max-width:1000px;margin:0 auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.1)}
+    .actions-bar{display:flex;justify-content:space-between;gap:10px;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #ddd}.ledger-btn{font-family:'Cairo',sans-serif;padding:10px;border:0;border-radius:5px;color:#fff;cursor:pointer;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;flex:1;transition:opacity .3s}.ledger-btn:hover{opacity:.8}.btn-filter{background:var(--btn-blue)}.btn-excel{background:var(--btn-green)}.btn-pdf{background:var(--btn-red)}
+    .ledger-header{text-align:center;margin-bottom:20px}.ledger-header h1{margin:0;color:var(--primary-color);font-size:1.8rem}.ledger-header h2{margin:5px 0 0;font-size:1.1rem;color:var(--text-muted)}
+    .account-info{display:flex;justify-content:space-between;background:#f8f9fa;border:1px solid #e9ecef;padding:12px 15px;border-radius:5px;margin-bottom:20px;font-weight:600;font-size:14px;flex-wrap:wrap;gap:10px}.account-info strong{color:var(--primary-color)}.account-info small{color:#7f8c8d}.currency-settings-hint{width:100%;font-size:11px;color:#64748b;font-weight:600;border-top:1px dashed #d8dee6;padding-top:8px}
+    .table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.ledger-page table{width:100%;min-width:760px;border-collapse:collapse;margin-bottom:10px}.ledger-page th,.ledger-page td{border:1px solid #ddd;padding:12px 8px;text-align:center;vertical-align:middle}.ledger-page th{background:var(--secondary-color);color:#fff;font-weight:700;font-size:14px}.ledger-page tbody tr:nth-child(even){background:#f9f9f9}.ledger-page tbody tr:hover{background:#f1f2f6}.val-primary{font-size:15px;font-weight:800;margin-bottom:2px;direction:ltr;white-space:nowrap}.val-secondary{font-size:12px;color:var(--usd-color);font-weight:700;display:inline-block;background:rgba(0,0,0,.03);border-radius:4px;padding:2px 8px;margin-top:3px;direction:ltr;white-space:nowrap}.debit-color{color:var(--debit-color)}.credit-color{color:var(--credit-color)}.balance-cell{background:#e8f6f3}.balance-color{color:var(--primary-color)}.footer-total{background:#f4f6f9;border-top:2px solid var(--secondary-color);border-bottom:2px solid var(--secondary-color);font-size:15px}.ledger-account-pill{display:inline-flex;align-items:center;justify-content:center;padding:3px 7px;border-radius:999px;background:#eef2ff;color:#4f46e5;font-size:10px;font-weight:800;white-space:nowrap}.empty-ledger{padding:28px!important;color:#7f8c8d}.ledger-period{text-align:left;color:#7f8c8d;font-size:11px;font-weight:600}
+    .ledger-modal{display:none;position:fixed;z-index:10050;inset:0;background:rgba(0,0,0,.5);justify-content:center;align-items:center;padding:15px}.ledger-modal-content{background:#fff;padding:25px;border-radius:8px;width:90%;max-width:400px;position:relative;box-shadow:0 5px 15px rgba(0,0,0,.3)}.close-btn{position:absolute;top:10px;left:15px;font-size:24px;cursor:pointer;color:#777;background:transparent;border:0}.modal-title{margin-top:0;color:var(--primary-color);border-bottom:2px solid #ddd;padding-bottom:10px}.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:15px}.form-group label{font-size:14px;font-weight:600;color:var(--secondary-color)}.form-control{width:100%;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:inherit;font-size:14px;box-sizing:border-box}.filter-options{display:flex;gap:10px;margin-bottom:15px}.filter-btn{flex:1;padding:8px;border:1px solid #ddd;background:#f9f9f9;border-radius:5px;cursor:pointer;font-family:inherit;font-weight:bold}.filter-btn:focus,.filter-btn:active{background:var(--btn-blue);color:#fff}.apply-btn{width:100%;background:var(--btn-blue);justify-content:center}.ledger-page button:focus-visible{outline:3px solid rgba(41,128,185,.25);outline-offset:2px}
+    @media(max-width:768px){.ledger-page{padding:5px}.ledger-container{padding:12px}.ledger-btn{font-size:12px;padding:8px 4px}.account-info{flex-direction:column;text-align:center}.currency-settings-hint{text-align:right}.ledger-header h1{font-size:1.45rem}}
+    @media print{.actions-bar{display:none!important}.ledger-container{box-shadow:none;padding:0}.ledger-page{background:#fff;padding:0}}
+  </style>
+<script src="cashtop-download-fix.js"></script>
+</head>
+<body>
+<div class="ct-sidebar-overlay" id="ctSidebarOverlay" data-ct-action="close-sidebar"></div>
+<div class="ct-app-shell">
+  <aside class="ct-sidebar" id="ctSidebar" aria-label="القائمة الجانبية">
+    <div class="ct-sidebar-brand">
+      <img src="cashtop-logo.png" alt="كاش توب 2">
+      <strong>كاش توب 2</strong>
+      <small id="ctSidebarCompany">كاش توب</small>
+    </div>
+
+    <nav class="ct-sidebar-nav">
+      <a class="ct-menu-link" href="لوحة التحكم.html" data-page="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>لوحة التحكم</span></a>
+      <a class="ct-menu-link" href="cashier.html" data-page="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-boxes-stacked"></i><span>المخزون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="products.html">المنتجات</a>
+          <a href="materials.html">الأصناف</a>
+          <a href="warehouses.html">المخازن</a>
+          <a href="branches.html">الفروع</a>
+          <a href="units.html">الوحدات</a>
+          <a href="shortages.html">النواقص</a>
+          <a href="barcode-generator.html">الباركود</a>
+          <a href="ادارة التصنيع.html">التصنيع</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-file-invoice-dollar"></i><span>الفواتير</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="invoices.html">فواتير المبيعات</a>
+          <a href="مرجع المبيعات.html">مرتجع المبيعات</a>
+          <a href="المشتريات.html">المشتريات</a>
+          <a href="مرجع المشتريات.html">مرتجع المشتريات</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users"></i><span>العملاء والموردون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="customers.html">العملاء</a>
+          <a href="customer-groups.html">مجموعات العملاء</a>
+          <a href="suppliers.html">الموردون</a>
+          <a href="المناديب.html">المناديب</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-wallet"></i><span>الحسابات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="accounts.html">الصناديق والحسابات</a>
+          <a href="journal.html">دفتر الأستاذ</a>
+          <a href="sands.html">سندات القبض والصرف</a>
+          <a href="المصاريف.html">المصاريف</a>
+          <a href="التقارير.html">التقارير</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-users-gear"></i><span>المستخدمون</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="الموظفين.html">الموظفون</a>
+          <a href="العمال والاجور.html">العمال والأجور</a>
+        </div>
+      </details>
+
+      <details class="ct-menu-group">
+        <summary><i class="fa-solid fa-gear"></i><span>الإدارة والإعدادات</span><i class="fa-solid fa-chevron-down ct-menu-arrow"></i></summary>
+        <div class="ct-submenu">
+          <a href="sales-offers.html">عروض المبيعات</a>
+          
+          
+          <a href="tax-settings.html">إعدادات الضريبة</a>
+          <a href="storage-settings.html">التخزين والأرشفة</a>
+          <a href="استيراد وتصدير ل كل قسم.html">النسخ الاحتياطي</a>
+          <a href="setting.html">إعدادات النظام</a>
+          <a href="printer-settings.html">إعدادات الطابعة</a>
+        </div>
+      </details>
+    </nav>
+
+    <button class="ct-sidebar-logout" type="button" data-ct-action="logout"><i class="fa-solid fa-right-from-bracket"></i><span>خروج</span></button>
+  </aside>
+
+  <section class="ct-main-wrapper">
+    <header class="ct-topbar">
+      <div class="ct-topbar-start">
+        <button class="ct-icon-button" type="button" data-ct-action="open-sidebar" aria-label="فتح القائمة"><i class="fa-solid fa-bars"></i></button>
+        <img class="ct-topbar-logo" src="cashtop-logo.png" alt="كاش توب 2">
+        <div class="ct-title-block">
+          <strong id="ctPageTitle">كاش توب</strong>
+          <small id="ctCompanyTitle">نظام المحاسبة والمخزون</small>
+        </div>
+      </div>
+      <div class="ct-topbar-actions">
+        <span class="ct-net-status" id="ctNetStatus"><i class="fa-solid fa-circle"></i><span>متصل</span></span>
+        <button class="ct-icon-button" id="ctSyncButton" type="button" data-ct-action="sync" title="مزامنة البيانات"><i class="fa-solid fa-rotate"></i></button>
+        <div class="ct-user-chip"><i class="fa-solid fa-user-shield"></i><span id="ctCurrentUser">مستخدم</span></div>
+        <button class="ct-icon-button ct-logout-top" type="button" data-ct-action="logout" title="خروج"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </header>
+
+    <main class="ct-page-host" id="ctPageHost"><div class="ct-original-page" id="ctOriginalPage">
+<div class="ledger-page">
+  <div class="ledger-container">
+    <div class="actions-bar">
+      <button class="ledger-btn btn-filter" id="openFilterBtn"><i class="fas fa-filter"></i> تصفية</button>
+      <button class="ledger-btn btn-excel" id="exportExcel"><i class="fas fa-file-excel"></i> إكسل</button>
+      <button class="ledger-btn btn-pdf" id="exportPDF"><i class="fas fa-file-pdf"></i> PDF</button>
+    </div>
+
+    <div id="printableArea">
+      <div class="ledger-header">
+        <h1 id="ledgerCompanyName">كاش توب</h1>
+        <h2>دفتر الأستاذ العام</h2>
+      </div>
+
+      <div class="account-info">
+        <span>الحساب: <strong id="ledgerAccountName">—</strong></span>
+        <span>العملات المعتمدة: <strong id="ledgerCurrencyInfo">₪ شيكل (أساسي)</strong> <small id="ledgerCurrencyNote">—</small></span>
+        <span class="currency-settings-hint"><i class="fa-solid fa-circle-info"></i> تعيين العملة الأساسية من إعدادات العملات في إعدادات النظام.</span>
+      </div>
+
+      <div class="table-responsive">
+        <table id="ledgerTable">
+          <thead>
+            <tr>
+              <th width="11%">التاريخ</th>
+              <th width="14%">طريقة الدفع</th>
+              <th width="27%">البيان / الشرح</th>
+              <th width="10%">رقم القيد</th>
+              <th width="13%">وارد</th>
+              <th width="13%">صادر</th>
+              <th width="12%">الرصيد</th>
+            </tr>
+          </thead>
+          <tbody id="ledgerTotalsBody">
+            <tr class="footer-total">
+              <td colspan="4" style="text-align:right;padding-right:20px;font-weight:800;">الإجمالي:</td>
+              <td id="ledgerDebitTotal">—</td>
+              <td id="ledgerCreditTotal">—</td>
+              <td class="balance-cell" id="ledgerBalanceTotal">—</td>
+            </tr>
+          </tbody>
+          <tbody id="ledgerBody"></tbody>
+        </table>
+      </div>
+      <div class="ledger-period" id="ledgerPeriod"></div>
+    </div>
+  </div>
+
+  <div id="filterModal" class="ledger-modal" aria-hidden="true">
+    <div class="ledger-modal-content">
+      <button class="close-btn" id="closeFilterBtn" type="button" aria-label="إغلاق">&times;</button>
+      <h3 class="modal-title"><i class="fas fa-filter"></i> تصفية الحركات</h3>
+      <div class="form-group">
+        <label>تحديد الصندوق / الحساب:</label>
+        <select class="form-control" id="assetSelect"></select>
+      </div>
+      <div class="filter-options">
+        <button class="filter-btn" type="button" data-period="day">يومي</button>
+        <button class="filter-btn" type="button" data-period="week">أسبوعي</button>
+        <button class="filter-btn" type="button" data-period="month">شهري</button>
+      </div>
+      <div class="form-group"><label>من تاريخ:</label><input type="date" class="form-control" id="startDate"></div>
+      <div class="form-group"><label>إلى تاريخ:</label><input type="date" class="form-control" id="endDate"></div>
+      <button class="ledger-btn apply-btn" id="applyFilterBtn" type="button"><i class="fas fa-check"></i> تطبيق الفلتر</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const state={accountId:'',from:'',to:''};
+  let ledgerExportState={rows:[],cfg:null,account:null};
+  const parseJson=(key,fallback)=>{try{const value=JSON.parse(localStorage.getItem(key));return value??fallback}catch(_){return fallback}};
+  const funds=()=>{
+    const primary=parseJson('cashtop_funds_db',{accounts:[],accountLogs:[]})||{};
+    const legacy=parseJson('cashtop_funds_db_v4',{accounts:[],accountLogs:[]})||{};
+    const mergeBy=(lists,keyFn)=>{const map=new Map();lists.flat().filter(Boolean).forEach(item=>{const key=keyFn(item);if(!key)return;const prev=map.get(key);if(!prev||Number(item?.updatedAt||item?.createdAt||0)>=Number(prev?.updatedAt||prev?.createdAt||0))map.set(key,item)});return [...map.values()]};
+    const accounts=mergeBy([Array.isArray(primary.accounts)?primary.accounts:[],Array.isArray(legacy.accounts)?legacy.accounts:[]],a=>String(a?.id||''));
+    const accountLogs=mergeBy([Array.isArray(primary.accountLogs)?primary.accountLogs:[],Array.isArray(legacy.accountLogs)?legacy.accountLogs:[]],log=>String(log?.id||`${log?.sourceType||''}|${log?.sourceId||''}|${log?.accountId||''}|${log?.date||''}|${log?.amount||''}|${log?.type||''}`));
+    return {accounts,accountLogs};
+  };
+  const currencyConfig=()=>window.CashtopMulti?.getCurrencyConfig?.()||{enabled:false,baseCurrencyId:'ILS',base:{id:'ILS',name:'شيكل',symbol:'₪',code:'ILS',ratePer100Base:100},currencies:[{id:'ILS',name:'شيكل',symbol:'₪',code:'ILS',ratePer100Base:100}]};
+  const currency=id=>window.CashtopMulti?.getCurrency?.(id)||currencyConfig().currencies.find(c=>String(c.id)===String(id))||currencyConfig().base;
+  const active=a=>window.Cashtop?.isFundActive?window.Cashtop.isFundActive(a):(a?.disabled!==true&&a?.active!==false&&String(a?.status||'').toLowerCase()!=='inactive');
+  const baseAmount=(amount,currencyId)=>Math.abs(Number(window.CashtopMulti?.toBase?.(Math.abs(Number(amount||0)),currencyId)??amount??0));
+  const signFor=log=>{const raw=Number(log?.amount);if(Number.isFinite(raw)&&raw<0)return-1;const type=String(log?.type||'').trim();if(/إيداع|قبض|وارد|إضافة|تحصيل|استلام|توريد نقدية|رصيد افتتاحي/.test(type))return 1;if(/سحب|صرف|صادر|مصروف|سداد|دفع/.test(type))return -1;return /إضافة|تحصيل|استلام|وارد/.test(String(log?.notes||''))?1:-1};
+  const dateKey=value=>{const text=String(value||'').trim();if(!text)return'';const iso=text.match(/^(\d{4})-(\d{2})-(\d{2})/);if(iso)return`${iso[1]}-${iso[2]}-${iso[3]}`;const gb=text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(gb)return`${gb[3]}-${String(gb[2]).padStart(2,'0')}-${String(gb[1]).padStart(2,'0')}`;const d=new Date(text);return Number.isNaN(d.getTime())?'':d.toISOString().slice(0,10)};
+  const timestamp=value=>{const text=String(value||'').trim();if(!text)return 0;const direct=new Date(text).getTime();if(Number.isFinite(direct))return direct;const key=dateKey(value);if(!key)return 0;const t=new Date(`${key}T00:00:00`).getTime();return Number.isFinite(t)?t:0};
+  const operationTimestamp=log=>{for(const value of [log?.createdAt,log?.updatedAt,log?.dateTime,log?.timestamp,log?.date]){const t=timestamp(value);if(t)return t}const id=String(log?.id||'');const nums=[...id.matchAll(/(?:^|_)(\d{12,14})(?:_|$)/g)].map(m=>Number(m[1])).filter(Number.isFinite);return nums.length?Math.max(...nums):0};
+  const formatDate=value=>{const key=dateKey(value);if(!key)return String(value||'-');const [y,m,d]=key.split('-');return`${y}/${m}/${d}`};
+  const number=value=>Number(value||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+  const primaryMoney=(value,cls='')=>{const base=currencyConfig().base;return`<div class="val-primary ${cls}">${esc(base.symbol||base.code)} ${number(value)}</div>`};
+  const secondaryMoney=(value,currencyId)=>{const cur=currency(currencyId);return`<div class="val-secondary">${esc(cur.symbol||cur.code)} ${number(value)}</div>`};
+  function companyName(){const settings=parseJson('cashtop_settings',{});return settings?.companyName||window.Cashtop?.getSession?.()?.companyName||'كاش توب'}
+  function orderedAccounts(accounts){const preferred=window.Cashtop?.getDefaultFundAccount?.(accounts.filter(active));return accounts.slice().sort((a,b)=>{const ad=preferred&&String(a.id)===String(preferred.id)?0:1,bd=preferred&&String(b.id)===String(preferred.id)?0:1;if(ad!==bd)return ad-bd;const aa=active(a)?0:1,ba=active(b)?0:1;if(aa!==ba)return aa-ba;return String(a.name||'').localeCompare(String(b.name||''),'ar')})}
+  function populateFilter(){const db=funds(),select=document.getElementById('assetSelect'),previous=state.accountId||select.value;const accounts=orderedAccounts(db.accounts);select.innerHTML='<option value="all">كل الصناديق والحسابات</option>'+accounts.map(a=>`<option value="${esc(a.id)}">${esc(a.name)}${active(a)?'':' — متوقف'}</option>`).join('');if(previous&&[...select.options].some(o=>String(o.value)===String(previous)))select.value=previous;else select.value='all';state.accountId=select.value}
+  function normalizedPaymentRows(record, baseField, nativeField) {
+    const cfg=currencyConfig();
+    const explicit=Array.isArray(record?.payments)&&record.payments.length?record.payments:[];
+    if(explicit.length)return explicit.map(payment=>({
+      accountId:payment.accountId, accountName:payment.accountName||'',
+      accountAmount:Math.abs(Number(payment.accountAmount||0)), accountCurrencyId:payment.accountCurrencyId||'',
+      baseAmount:Math.abs(Number(payment.baseAmount||0)), transactionAmount:Math.abs(Number(payment.transactionAmount||0)),
+      transactionCurrencyId:payment.transactionCurrencyId||record?.currencyId||cfg.baseCurrencyId
+    })).filter(payment=>payment.accountId&&payment.accountAmount>0);
+    const accountId=record?.accountId;
+    if(!accountId||String(accountId)==='__MULTI_PAYMENT__')return[];
+    const account=funds().accounts.find(item=>String(item.id)===String(accountId));
+    const base=Math.abs(Number(record?.[baseField]??0));
+    const tx=Math.abs(Number(record?.[nativeField]??record?.[baseField]??0));
+    if(!(base>0||tx>0))return[];
+    const accountCurrencyId=record?.accountCurrencyId||account?.currencyId||cfg.baseCurrencyId;
+    const accountAmount=Math.abs(Number(record?.accountAmountNative ?? (window.CashtopMulti?.accountAmountFromBase?.(base,accountCurrencyId)??tx)));
+    return [{accountId,accountName:record?.accountName||account?.name||'',accountAmount,accountCurrencyId,baseAmount:base||baseAmount(accountAmount,accountCurrencyId),transactionAmount:tx||base,transactionCurrencyId:record?.currencyId||cfg.baseCurrencyId}];
+  }
+  function synthesizedTransactionLogs(db){
+    const actual=Array.isArray(db.accountLogs)?db.accountLogs:[];
+    const accountById=new Map((db.accounts||[]).map(account=>[String(account.id),account]));
+    const out=[];
+    const comparableDate=value=>dateKey(value||'');
+    const hasEquivalent=(sourceType,sourceId,payment,direction,date,description='')=>actual.some(log=>{
+      if(String(log?.accountId||'')!==String(payment?.accountId||''))return false;
+      if(signFor(log)!==direction)return false;
+      const sourceMatches=String(log?.sourceId||'')&&String(sourceId||'')&&String(log.sourceId)===String(sourceId) && (!log.sourceType||String(log.sourceType)===String(sourceType));
+      if(sourceMatches)return true;
+      const logBase=Math.abs(Number(log?.baseAmount||0))||baseAmount(Math.abs(Number(log?.amount||0)),log?.currencyId||accountById.get(String(log?.accountId))?.currencyId);
+      const payBase=Math.abs(Number(payment?.baseAmount||0))||baseAmount(Math.abs(Number(payment?.accountAmount||0)),payment?.accountCurrencyId||accountById.get(String(payment?.accountId))?.currencyId);
+      if(Math.abs(logBase-payBase)>0.01)return false;
+      if(date&&comparableDate(log?.date||log?.createdAt)!==comparableDate(date))return false;
+      const note=String(log?.notes||log?.description||'');
+      return !description || !note || note.includes(String(description).slice(0,24)) || String(description).includes(note.slice(0,24));
+    });
+    const add=(sourceType,record,direction,payments,description)=>{
+      if(!record||!payments?.length)return;
+      const sourceId=record.id||record.refId||record.refNumber||'';
+      const date=record.createdAt||record.updatedAt||record.date||new Date().toISOString();
+      payments.forEach((payment,index)=>{
+        const account=accountById.get(String(payment.accountId));
+        if(!account)return;
+        const text=description(record,payment);
+        if(hasEquivalent(sourceType,sourceId,payment,direction,date,text))return;
+        const native=Math.abs(Number(payment.accountAmount||0));
+        const base=Math.abs(Number(payment.baseAmount||0))||baseAmount(native,payment.accountCurrencyId||account.currencyId);
+        if(!(native>0||base>0))return;
+        out.push({
+          id:`LEDGER_RECOVER_${sourceType}_${sourceId||Date.now()}_${index}`,recovered:true,sourceType,sourceId,
+          accountId:account.id,date,createdAt:record.createdAt||record.updatedAt||date,type:direction>0?'إيداع':'سحب',amount:native,baseAmount:base,
+          currencyId:payment.accountCurrencyId||account.currencyId,transactionAmount:Number(payment.transactionAmount||0)||base,
+          transactionCurrencyId:payment.transactionCurrencyId||record.currencyId||currencyConfig().baseCurrencyId,notes:text
+        });
+      });
+    };
+    const arr=key=>{const value=parseJson(key,[]);return Array.isArray(value)?value:[]};
+    const expenseDirection=record=>/توريد|دخل|إيراد|وارد|استلام/.test(String(record?.type||record?.name||record?.title||''))?+1:-1;
+    arr('cashtop_invoices').forEach(record=>add('sale',record,+1,normalizedPaymentRows(record,'paid','paidNative'),r=>`تحصيل فاتورة بيع [${r.id||'-'}] من [${r.customer||r.customerName||'عميل'}]`));
+    const purchases=[...arr('cashtop_purchases'),...arr('cashtop_purchase_invoices')];
+    const seenPurchases=new Set();purchases.forEach(record=>{const key=String(record?.id||'');if(key&&seenPurchases.has(key))return;if(key)seenPurchases.add(key);add('purchaseInvoice',record,-1,normalizedPaymentRows(record,'paid','paidNative'),r=>`سداد فاتورة مشتريات [${r.id||'-'}] للمورد [${r.supplierName||'مورد'}]`)});
+    arr('cashtop_expenses').forEach(record=>{const direction=expenseDirection(record);add('expense',record,direction,normalizedPaymentRows(record,'amount','amountNative'),r=>`${direction>0?'وارد':'مصروف'}: ${r.name||r.title||r.type||r.details||r.id||'-'}`)});
+    arr('cashtop_vouchers').forEach(record=>add('voucher',record,String(record.type)==='قبض'?+1:-1,normalizedPaymentRows(record,'amount','amountNative'),r=>`${String(r.type)==='قبض'?'سند قبض':'سند صرف'} [${r.refNumber||r.id||'-'}] | ${r.relationName||''}`));
+    arr('cashtop_sales_returns').filter(r=>r.sourceType!=='customer_balance').forEach(record=>add('salesReturn',record,-1,normalizedPaymentRows(record,'totalValue','totalValue'),r=>`مرتجع مبيعات [${r.id||'-'}] للعميل ${r.customerName||''}`));
+    arr('cashtop_purchase_returns').forEach(record=>add('purchaseReturn',record,+1,normalizedPaymentRows(record,'receivedCash','receivedCashNative'),r=>`مرتجع مشتريات [${r.id||'-'}] من المورد ${r.supplierName||''}`));
+    arr('cashtop_material_purchases').forEach(record=>add('materialPurchase',record,-1,normalizedPaymentRows(record,'paidBase','paidNative'),r=>`توريد صنف تصنيع: ${r.materialName||r.name||r.id||'-'}`));
+    arr('cashtop_salary_payments').forEach(record=>add(record.employeeId?'employeeSalary':'workerSalary',record,-1,normalizedPaymentRows(record,'amount','amountNative'),r=>`دفع راتب/أجر: ${r.employeeName||r.workerName||r.name||r.id||'-'}`));
+    // Supplier payments have historically lived inside each supplier record.
+    arr('cashtop_suppliers').forEach(supplier=>(Array.isArray(supplier?.movements)?supplier.movements:[]).filter(m=>String(m?.type)==='payment').forEach(movement=>add('supplierPayment',{...movement,id:movement.id||movement.refId,supplierName:supplier.name},-1,normalizedPaymentRows({...movement,accountId:movement.accountId||movement.vaultId},'amount','amountNative'),()=>`سداد للمورد [${supplier.name||'مورد'}]`)));
+    // Worker payments/advances are also embedded in worker movement history on older builds.
+    arr('cashtop_workers').forEach(worker=>(Array.isArray(worker?.movements)?worker.movements:[]).filter(m=>['payment','debt'].includes(String(m?.type))).forEach(movement=>add(String(movement.type)==='debt'?'workerDebt':'workerPayment',{...movement,id:movement.id,accountId:movement.accountId||movement.vaultId,workerName:worker.name},-1,normalizedPaymentRows({...movement,accountId:movement.accountId||movement.vaultId},'amount','amountNative'),()=>`${String(movement.type)==='debt'?'سلفة':'راتب/دفعة'} للعامل: ${worker.name||''}`)));
+    // Representative cash collection / commission payment fallback.
+    const agents=new Map(arr('cashtop_sales_agents').map(agent=>[String(agent.id),agent]));
+    arr('cashtop_agent_movements').forEach(movement=>{
+      const agent=agents.get(String(movement.agentId))||{};const type=String(movement.type||'');
+      if(!Array.isArray(movement.payments)||!movement.payments.length)return;
+      if(type.includes('توريد نقدية'))add('agentCollection',movement,+1,movement.payments,()=>`استلام نقدية مبيعات من المندوب: ${agent.name||movement.agentName||''}`);
+      else if(type.includes('صرف دفعة')||type.includes('عمولة'))add('agentCommissionPayment',movement,-1,movement.payments,()=>`تسديد عمولة للمندوب: ${agent.name||movement.agentName||''}`);
+    });
+    return out;
+  }
+  function buildTimeline(){
+    const db=funds(),cfg=currencyConfig(),selected=state.accountId||'all',scopeAccounts=selected==='all'?db.accounts:db.accounts.filter(a=>String(a.id)===String(selected)),ids=new Set(scopeAccounts.map(a=>String(a.id))),accountById=new Map(db.accounts.map(a=>[String(a.id),a]));
+    const combined=[...(db.accountLogs||[]),...synthesizedTransactionLogs(db)].map((log,index)=>({log,index})).filter(entry=>ids.has(String(entry.log?.accountId))).sort((a,b)=>(operationTimestamp(a.log)-operationTimestamp(b.log))||(a.index-b.index));
+    const rows=combined.map(entry=>entry.log);
+    const currentBase=scopeAccounts.reduce((sum,a)=>sum+baseAmount(a.balance,a.currencyId||cfg.baseCurrencyId),0);
+    const currentNative=selected==='all'?null:Number(scopeAccounts[0]?.balance||0);
+    let signedBaseTotal=0,signedNativeTotal=0;
+    rows.forEach(log=>{const account=accountById.get(String(log.accountId))||{},sgn=signFor(log),native=Math.abs(Number(log.amount||0)),cid=log.currencyId||account.currencyId||cfg.baseCurrencyId,stored=Number(log.baseAmount),base=Number.isFinite(stored)&&Math.abs(stored)>0?Math.abs(stored):baseAmount(native,cid);signedBaseTotal+=sgn*base;if(selected!=='all')signedNativeTotal+=sgn*native});
+    let runningBase=currentBase-signedBaseTotal,runningNative=currentNative==null?null:currentNative-signedNativeTotal;
+    const openingBase=runningBase,openingNative=runningNative;
+    const timeline=rows.map(log=>{const account=accountById.get(String(log.accountId))||{},sgn=signFor(log),native=Math.abs(Number(log.amount||0)),cid=log.currencyId||account.currencyId||cfg.baseCurrencyId,stored=Number(log.baseAmount),base=Number.isFinite(stored)&&Math.abs(stored)>0?Math.abs(stored):baseAmount(native,cid);runningBase+=sgn*base;if(runningNative!=null)runningNative+=sgn*native;const transactionCurrencyId=log.transactionCurrencyId||cid,transactionAmount=Number.isFinite(Number(log.transactionAmount))&&Math.abs(Number(log.transactionAmount))>0?Math.abs(Number(log.transactionAmount)):native;return{log,account,sgn,native,currencyId:cid,transactionCurrencyId,transactionAmount,base,runningBase,runningNative,date:dateKey(log.date||log.createdAt),ts:operationTimestamp(log)}});
+    return{db,cfg,selected,scopeAccounts,timeline,openingBase,openingNative,currentBase,currentNative};
+  }
+  function render(){
+    populateFilter();const data=buildTimeline(),cfg=data.cfg,base=cfg.base,from=state.from,to=state.to;const filtered=data.timeline.filter(row=>(!from||row.date>=from)&&(!to||row.date<=to));
+    const account=data.selected==='all'?null:data.scopeAccounts[0];document.getElementById('ledgerCompanyName').textContent=companyName();document.getElementById('ledgerAccountName').textContent=data.selected==='all'?'كل الصناديق والحسابات':(account?`${account.name} (${account.id})`:'حساب غير موجود');document.getElementById('ledgerCurrencyInfo').textContent=`${base.symbol||base.code} ${base.name||base.code} (أساسي)`;
+    const note=document.getElementById('ledgerCurrencyNote');if(account&&String(account.currencyId||cfg.baseCurrencyId)!==String(cfg.baseCurrencyId)){const cur=currency(account.currencyId);note.textContent=`- عملة الصندوق: ${cur.symbol||cur.code} ${cur.name||cur.code}`}else note.textContent=data.selected==='all'?'- عرض موحد بالعملة الأساسية مع إظهار عملة كل حركة':'- عملة الصندوق هي الأساسية';
+    const body=document.getElementById('ledgerBody');let debitTotal=0,creditTotal=0;
+    filtered.forEach(row=>{if(row.sgn>0)debitTotal+=row.base;else creditTotal+=row.base});
+    const displayRows=filtered.slice().reverse();
+    ledgerExportState={rows:displayRows,cfg,account};
+    const createLedgerRow=row=>{const secondaryParts=[];if(String(row.currencyId)!==String(cfg.baseCurrencyId))secondaryParts.push(secondaryMoney(row.native,row.currencyId));if(String(row.transactionCurrencyId)!==String(cfg.baseCurrencyId)&&String(row.transactionCurrencyId)!==String(row.currencyId))secondaryParts.push(secondaryMoney(row.transactionAmount,row.transactionCurrencyId));const secondary=secondaryParts.join('');const balanceSecondary=account&&String(account.currencyId||cfg.baseCurrencyId)!==String(cfg.baseCurrencyId)?secondaryMoney(row.runningNative,account.currencyId):'';const recovered=row.log.recovered?' <span title="تم استكمالها من سجل العملية" style="font-size:9px;color:#7c3aed">•</span>':'';const tr=document.createElement('tr');tr.innerHTML=`<td>${formatDate(row.log.date)}</td><td><span class="ledger-account-pill">${esc(row.account?.name||row.log.accountName||row.log.accountId||'طريقة دفع')}</span></td><td style="text-align:right">${esc(row.log.notes||row.log.description||'حركة صندوق')}${recovered}</td><td>${esc(row.log.sourceId||row.log.refNumber||row.log.id||'-')}</td><td>${row.sgn>0?primaryMoney(row.base,'debit-color')+secondary:'-'}</td><td>${row.sgn<0?primaryMoney(row.base,'credit-color')+secondary:'-'}</td><td class="balance-cell">${primaryMoney(row.runningBase,'balance-color')}${balanceSecondary}</td>`;return tr};
+    if(window.Cashtop?.renderVirtualRows)window.Cashtop.renderVirtualRows(body,displayRows,createLedgerRow,{chunkSize:80,eagerLimit:150,windowThreshold:300,windowSize:180,rowHeight:54,colspan:7,emptyHtml:'<tr><td colspan="7" class="empty-ledger">لا توجد حركات مطابقة للفترة المحددة.</td></tr>'});
+    else{body.innerHTML='';if(!displayRows.length)body.innerHTML='<tr><td colspan="7" class="empty-ledger">لا توجد حركات مطابقة للفترة المحددة.</td></tr>';else displayRows.slice(0,300).forEach(row=>body.appendChild(createLedgerRow(row)))}
+    let endingBase=data.currentBase,endingNative=data.currentNative;if(to){const candidates=data.timeline.filter(r=>r.date&&r.date<=to);endingBase=candidates.length?candidates[candidates.length-1].runningBase:data.openingBase;if(account)endingNative=candidates.length?candidates[candidates.length-1].runningNative:data.openingNative}else if(filtered.length){endingBase=filtered[filtered.length-1].runningBase;if(account)endingNative=filtered[filtered.length-1].runningNative}
+    document.getElementById('ledgerDebitTotal').innerHTML=primaryMoney(debitTotal,'debit-color');document.getElementById('ledgerCreditTotal').innerHTML=primaryMoney(creditTotal,'credit-color');document.getElementById('ledgerBalanceTotal').innerHTML=primaryMoney(endingBase,'balance-color')+(account&&String(account.currencyId||cfg.baseCurrencyId)!==String(cfg.baseCurrencyId)?secondaryMoney(endingNative,account.currencyId):'');
+    document.getElementById('ledgerPeriod').textContent=(from||to)?`الفترة: ${from||'البداية'} — ${to||'حتى اليوم'}`:'جميع الحركات — الأحدث في الأعلى';
+  }
+  function setPeriod(kind){const now=new Date(),end=now.toISOString().slice(0,10),start=new Date(now);if(kind==='week')start.setDate(now.getDate()-6);else if(kind==='month')start.setDate(1);document.getElementById('endDate').value=end;document.getElementById('startDate').value=kind==='day'?end:start.toISOString().slice(0,10)}
+  const modal=document.getElementById('filterModal');const openModal=()=>{populateFilter();document.getElementById('assetSelect').value=state.accountId||'all';document.getElementById('startDate').value=state.from;document.getElementById('endDate').value=state.to;modal.style.display='flex';modal.setAttribute('aria-hidden','false')};const closeModal=()=>{modal.style.display='none';modal.setAttribute('aria-hidden','true')};
+  document.getElementById('openFilterBtn').onclick=openModal;document.getElementById('closeFilterBtn').onclick=closeModal;modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.querySelectorAll('[data-period]').forEach(btn=>btn.onclick=()=>setPeriod(btn.dataset.period));document.getElementById('applyFilterBtn').onclick=()=>{state.accountId=document.getElementById('assetSelect').value||'all';state.from=document.getElementById('startDate').value;state.to=document.getElementById('endDate').value;closeModal();render()};
+  function ledgerExportText(row){
+    const cfg=ledgerExportState.cfg||currencyConfig(),base=cfg.base||{};
+    const parts=[`${Number(row.base||0).toFixed(2)} ${base.symbol||base.code||''}`];
+    if(String(row.currencyId)!==String(cfg.baseCurrencyId)){const cur=currency(row.currencyId);parts.push(`${Number(row.native||0).toFixed(2)} ${cur?.symbol||cur?.code||''}`)}
+    if(String(row.transactionCurrencyId)!==String(cfg.baseCurrencyId)&&String(row.transactionCurrencyId)!==String(row.currencyId)){const cur=currency(row.transactionCurrencyId);parts.push(`${Number(row.transactionAmount||0).toFixed(2)} ${cur?.symbol||cur?.code||''}`)}
+    return parts.join(' | ');
+  }
+  document.getElementById('exportExcel').onclick=()=>{
+    const rows=ledgerExportState.rows||[];
+    const data=[['التاريخ','طريقة الدفع / الحساب','البيان','المرجع','وارد','صادر','الرصيد بالعملة الأساسية']];
+    rows.forEach(row=>data.push([formatDate(row.log.date),row.account?.name||row.log.accountName||row.log.accountId||'',row.log.notes||row.log.description||'حركة صندوق',row.log.sourceId||row.log.refNumber||row.log.id||'',row.sgn>0?ledgerExportText(row):'',row.sgn<0?ledgerExportText(row):'',Number(row.runningBase||0)]));
+    const ws=XLSX.utils.aoa_to_sheet(data),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'دفتر الأستاذ');XLSX.writeFile(wb,`دفتر_الأستاذ_${new Date().toISOString().slice(0,10)}.xlsx`)
+  };
+  document.getElementById('exportPDF').onclick=()=>{
+    const rows=ledgerExportState.rows||[],cfg=ledgerExportState.cfg||currencyConfig();
+    const host=document.createElement('div');host.dir='rtl';host.style.cssText='position:fixed;left:-100000px;top:0;width:760px;background:white;padding:18px;font-family:Cairo,Arial,sans-serif;color:#111';
+    host.innerHTML=`<h2 style="text-align:center;margin:0 0 12px">دفتر الأستاذ</h2><div style="margin-bottom:10px">${esc(document.getElementById('ledgerAccountName')?.textContent||'')}</div><table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr>${['التاريخ','طريقة الدفع','البيان','المرجع','وارد','صادر','الرصيد'].map(x=>`<th style="border:1px solid #bbb;padding:5px">${x}</th>`).join('')}</tr></thead><tbody>${rows.map(row=>`<tr><td style="border:1px solid #ddd;padding:4px">${esc(formatDate(row.log.date))}</td><td style="border:1px solid #ddd;padding:4px">${esc(row.account?.name||row.log.accountName||row.log.accountId||'')}</td><td style="border:1px solid #ddd;padding:4px">${esc(row.log.notes||row.log.description||'حركة صندوق')}</td><td style="border:1px solid #ddd;padding:4px">${esc(row.log.sourceId||row.log.refNumber||row.log.id||'-')}</td><td style="border:1px solid #ddd;padding:4px">${row.sgn>0?esc(ledgerExportText(row)):'-'}</td><td style="border:1px solid #ddd;padding:4px">${row.sgn<0?esc(ledgerExportText(row)):'-'}</td><td style="border:1px solid #ddd;padding:4px">${Number(row.runningBase||0).toFixed(2)} ${esc(cfg.base?.symbol||cfg.base?.code||'')}</td></tr>`).join('')}</tbody></table>`;
+    document.body.appendChild(host);
+    html2pdf().set({margin:5,filename:`دفتر_الأستاذ_${new Date().toISOString().slice(0,10)}.pdf`,image:{type:'jpeg',quality:.96},html2canvas:{scale:1.5,useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}}).from(host).save().finally(()=>host.remove())
+  };
+  const ledgerRelevantKeys=new Set(['cashtop_funds_db','cashtop_funds_db_v4','cashtop_currency_config','cashtop_settings','cashtop_invoices','cashtop_purchases','cashtop_purchase_invoices','cashtop_expenses','cashtop_vouchers','cashtop_sales_returns','cashtop_purchase_returns','cashtop_material_purchases','cashtop_salary_payments','cashtop_suppliers','cashtop_workers','cashtop_sales_agents','cashtop_agent_movements']);
+  window.addEventListener('cashtop:data-changed',e=>{if(ledgerRelevantKeys.has(e.detail?.key))render()});
+  window.addEventListener('cashtop:remote-applied',e=>{if(ledgerRelevantKeys.has(e.detail?.key))render()});
+  window.addEventListener('storage',e=>{if(ledgerRelevantKeys.has(e.key))render()});
+  window.addEventListener('load',()=>{populateFilter();state.accountId=document.getElementById('assetSelect').value;render()});
+})();
+</script>
+
+</div></main>
+
+    <nav class="ct-bottom-nav" aria-label="التنقل السريع">
+      <a href="لوحة التحكم.html"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a>
+      <a href="cashier.html"><i class="fa-solid fa-cash-register"></i><span>الكاشير</span></a>
+      <a href="products.html"><i class="fa-solid fa-box-open"></i><span>المنتجات</span></a>
+      <a href="customers.html"><i class="fa-solid fa-users"></i><span>العملاء</span></a>
+      <a href="invoices.html"><i class="fa-solid fa-file-invoice"></i><span>الفواتير</span></a>
+    </nav>
+  </section>
+</div>
+
+<script type="application/json" id="ctEmbeddedShellMarker">{"embedded":true,"page":"journal.html"}</script>
+</body>
+</html>

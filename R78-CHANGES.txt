@@ -1,0 +1,27 @@
+CASH TOP R78 — Financial Groups + Integrity
+
+1) Financial Groups
+- Built on R77/R75 financial-groups model.
+- Closed groups are immutable at the managed storage layer: group-scoped writes/removals are rejected.
+- Removed the old read-only banner text from pages.
+- Financial groups page uses Cairo and inline SVG folder/lock icons; loading uses a CSS spinner (no missing icon glyphs).
+- Opening balances continue to carry cash/banks, inventory, customer receivables and supplier payables.
+- Reports read current carried customer/fund balances so opening balances appear in the new group while period sales/expenses remain reset.
+
+2) Fund integrity
+- A fund/account with any prior financial movement or non-zero balance cannot be permanently deleted.
+- Delete converts used accounts to inactive (soft delete); history and balances stay in reports.
+- Central merge protection prevents an import/write from dropping a used fund; it is retained as inactive.
+- Inactive funds are hidden from new-transaction selectors (sales, purchases, expenses, customers, suppliers, workers, materials, product purchase and purchase returns).
+
+3) Purchase reversals
+- Full purchase deletion validates available stock before reversal.
+- Full deletion reverses stock, supplier debt and refunds paid amounts to the original fund(s), including split payments.
+- Original supplier/account movements are retained; reversal movements are appended for auditability.
+- Deleting one invoice item applies the same stock validation and reverses debt/paid amounts proportionally to the invoice settlement.
+
+4) Cache
+- Cache version bumped to R78.
+- All 40 HTML pages remain pre-cached.
+- Navigation stays Cache-First even when internet is available; background refresh remains enabled.
+- Turso bootstrap/usage state keys remain on v77 intentionally to avoid unnecessary full re-bootstrap reads after upgrading.

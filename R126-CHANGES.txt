@@ -1,0 +1,9 @@
+CASH TOP R126
+
+- Dedicated cloud license watchdog reads cashtop_company_access only.
+- Immediate check on page open/focus/pageshow/online plus visible-page checks every 2.5 seconds.
+- Disabled, deleted, expired or mismatched keys force logout without waiting for record synchronization.
+- Forced logout removes tab session, persistent session and remembered key.
+- Durable IndexedDB session is deleted and awaited before redirecting to login.
+- License invalidation is broadcast to other open tabs/windows.
+- Business calculations, 50-record pager and background record sync from R125 are unchanged.

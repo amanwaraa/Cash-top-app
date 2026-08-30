@@ -1,0 +1,20 @@
+CASH TOP R84 - Sales Returns + Global Dropdown + Cache First
+============================================================
+
+1) Added a real "مرجع المبيعات" page connected to project data.
+2) Product autocomplete reads cashtop_products. Selecting a product automatically fills its selling price.
+3) The return unit dropdown exposes only the unit the product was originally configured/added with. Stock is restored using factorToBase.
+4) Customer autocomplete reads cashtop_customers.
+5) Return source is either:
+   - customer balance: total is added to the selected customer's balance.
+   - any active fund/account: converted native amount is deducted from that account.
+6) Save increases product stock using quantity/unit conversion.
+7) Edit reverses the prior stock/customer/fund effect before applying the edited record.
+8) Delete reverses the return entirely: returned stock is removed, customer credit is removed or fund cash is restored.
+9) Accounting journal now creates balanced Sales Returns + Inventory/COGS reversal entries.
+10) Sales-return edits are audit-safe: the old journal is archived and a reversal entry is generated before the edited journal is applied. Deletion does the same.
+11) Sales returns are included in synced/scoped project data and customer history.
+12) Added the page to the Sales menu and dashboard quick navigation.
+13) Native select menus across the app use the same white popup style as the returns design, including mobile, with search for long lists.
+14) Service Worker bumped to v84-sales-returns-global-dropdown-cache-first. All local pages/assets are installed into Cache Storage and served cache-first even while online; live API/database calls are never cached.
+15) Performance hints use compositor-friendly transform/opacity and existing requestAnimationFrame/content-visibility optimizations for high-refresh displays. Actual 120fps depends on browser/device/display capability.

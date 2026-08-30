@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شاشة المزامنة</title>
+    
+    <!-- استدعاء خط كايرو من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- استدعاء Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            500: '#a855f7',
+                            600: '#9333ea', /* لون البنفسجي الأساسي */
+                            700: '#7e22ce',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* حركة دوران ناعمة للأيقونة الرئيسية */
+        .spin-slow {
+            animation: spin 3.5s linear infinite;
+        }
+
+        /* نفس التصميم يبقى جاهزاً حتى لو فُتحت شاشة المزامنة بدون إنترنت قبل تحميل Tailwind. */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        * { box-sizing: border-box; }
+        html, body { margin: 0; min-height: 100%; }
+        body { font-family: 'Cairo', sans-serif; }
+        .bg-\[\#f8fafc\]{background-color:#f8fafc}.flex{display:flex}.items-center{align-items:center}.justify-center{justify-content:center}.min-h-screen{min-height:100vh}.text-gray-800{color:#1f2937}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.w-full{width:100%}.max-w-sm{max-width:24rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.flex-col{flex-direction:column}.mb-8{margin-bottom:2rem}.text-brand-600{color:#9333ea}.relative{position:relative}.drop-shadow-sm{filter:drop-shadow(0 1px 1px rgba(0,0,0,.05))}.w-20{width:5rem}.h-20{height:5rem}.text-2xl{font-size:1.5rem;line-height:2rem}.font-bold{font-weight:700}.text-brand-700{color:#7e22ce}.mb-2{margin-bottom:.5rem}.text-center{text-align:center}.tracking-wide{letter-spacing:.025em}.text-gray-400{color:#9ca3af}.text-sm{font-size:.875rem;line-height:1.25rem}.font-semibold{font-weight:600}.mb-12{margin-bottom:3rem}.bg-white{background-color:#fff}.rounded-3xl{border-radius:1.5rem}.p-5{padding:1.25rem}.border{border-width:1px}.border-gray-50{border-color:#f9fafb}.justify-between{justify-content:space-between}.mb-5{margin-bottom:1.25rem}.text-gray-700{color:#374151}.text-\[15px\]{font-size:15px}.bg-brand-50{background-color:#faf5ff}.p-2{padding:.5rem}.rounded-xl{border-radius:.75rem}.w-4{width:1rem}.h-4{height:1rem}.animate-spin{animation:spin 1s linear infinite}.h-2\.5{height:.625rem}.rounded-full{border-radius:9999px}.overflow-hidden{overflow:hidden}.h-full{height:100%}.transition-all{transition-property:all}.duration-500{transition-duration:.5s}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}.w-\[10\%\]{width:10%}.mt-1{margin-top:.25rem}.text-xs{font-size:.75rem;line-height:1rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.px-3{padding-left:.75rem;padding-right:.75rem}.rounded-lg{border-radius:.5rem}.shadow-\[0_8px_30px_rgb\(0\,0\,0\,0\.04\)\]{box-shadow:0 8px 30px rgb(0 0 0 / .04)}
+    </style>
+</head>
+<body class="bg-[#f8fafc] flex items-center justify-center min-h-screen text-gray-800 antialiased">
+
+    <!-- الحاوية الرئيسية -->
+    <div class="w-full max-w-sm px-6 py-8 flex flex-col items-center">
+        
+        <!-- الأيقونة الرئيسية (أيقونة سحابية/تحديث حديثة بخطوط رفيعة) -->
+        <div class="mb-8 text-brand-600 relative drop-shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-20 h-20 spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+        </div>
+
+        <!-- النصوص الرئيسية -->
+        <h1 id="mainTitle" class="text-2xl font-bold text-brand-700 mb-2 text-center tracking-wide">جاري المزامنة، يرجى الانتظار...</h1>
+        <p id="subTitle" class="text-gray-400 text-sm font-semibold mb-12 text-center">لحظات ونكون جاهزين...</p>
+
+        <!-- بطاقة التقدم (Card) -->
+        <div class="w-full bg-white rounded-3xl p-5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
+            
+            <!-- رأس البطاقة -->
+            <div class="flex justify-between items-center mb-5">
+                <span id="statusTitle" class="text-gray-700 font-semibold text-[15px]">جاري جلب الصلاحيات...</span>
+                <!-- أيقونة التحديث الصغيرة -->
+                <div class="bg-brand-50 p-2 rounded-xl text-brand-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- شريط التقدم (Progress Bar) -->
+            <div class="w-full h-2.5 bg-brand-50 rounded-full overflow-hidden mb-5 relative">
+                <div id="barFill" class="h-full bg-brand-600 rounded-full transition-all duration-500 ease-out w-[10%]"></div>
+            </div>
+
+            <!-- تذييل البطاقة -->
+            <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-gray-400 font-bold">تقدم العملية</span>
+                <!-- النسبة المئوية -->
+                <span id="percent" class="bg-brand-50 text-brand-700 font-bold text-xs py-1 px-3 rounded-lg">10%</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="cashtop-core.js?v=126"></script>
+    <script src="activation-runtime.js?v=500"></script><script src="turso-config.js?v=500"></script>
+    <script src="turso-rtdb.js?v=106"></script>
+    <script src="turso-sync.js?v=127"></script>
+    <script>
+    (function(){
+      'use strict';
+      const core = window.Cashtop;
+      const percentEl = document.getElementById('percent');
+      const fillEl = document.getElementById('barFill');
+      const statusTitle = document.getElementById('statusTitle');
+      const mainTitle = document.getElementById('mainTitle');
+      const subTitle = document.getElementById('subTitle');
+      let shown = 0;
+      let phaseBase = 0;
+      let phaseSpan = 100;
+      let running = false;
+      let autoTimer = null;
+
+      function session(){ return core?.getSession?.() || null; }
+      function gateKey(){
+        const s=session()||{};
+        const tenant=String(s.tenantId||s.companyId||s.licenseId||s.companyKey||'unassigned');
+        return `ct_login_sync_gate_v1::${encodeURIComponent(tenant)}`;
+      }
+      function saveGate(completeOnline, extra={}){
+        try{
+          const s=session()||{};
+          localStorage.setItem(gateKey(), JSON.stringify({ loginAt:String(s.loginAt||''), completeOnline:completeOnline===true, at:Date.now(), ...extra }));
+        }catch(_){}
+      }
+      function setProgress(value,title){
+        const next=Math.max(shown,Math.min(100,Math.round(Number(value)||0)));
+        shown=next;
+        fillEl.style.width=next+'%';
+        percentEl.textContent=next+'%';
+        if(title)statusTitle.textContent=title;
+      }
+      function setPhase(base,span){ phaseBase=Number(base)||0; phaseSpan=Number(span)||0; }
+      function enterDashboard(delay=650){ clearTimeout(autoTimer); autoTimer=setTimeout(()=>location.replace('لوحة التحكم.html'),delay); }
+      function mapSyncProgress(detail={}){
+        if(running!==true || detail.done===true)return;
+        const total=Math.max(1,Number(detail.total||1));
+        const current=Math.max(0,Math.min(total,Number(detail.current||0)));
+        const ratio=current/total;
+        setProgress(phaseBase+(ratio*phaseSpan),detail.label||'جاري مزامنة البيانات...');
+      }
+      window.addEventListener('cashtop:sync-progress',e=>mapSyncProgress(e.detail||{}));
+
+      async function localReady(){
+        setPhase(2,12);setProgress(3,'جاري تجهيز البيانات المحلية...');
+        try{await Promise.resolve(core?.syncReady||core?.localReady);}catch(_){}
+        try{await core?.flushDurableLocalWrites?.();}catch(_){}
+        const pending=Number(core?.getSyncQueue?.().length||0);
+        setProgress(14,pending?`جاري تجهيز ${pending} عملية للرفع...`:'البيانات المحلية جاهزة...');
+        return pending;
+      }
+
+      async function run(){
+        if(running)return;
+        running=true;
+        try{
+          const s=session();
+          if(!s){ location.replace('صفحة تسجيل الدخول.html?reason=auth-required'); return; }
+          await localReady();
+          const syncer=window.CashtopTurso;
+          if(!syncer){
+            saveGate(false,{reason:'sync-engine-unavailable'});
+            setProgress(100,'تم تجهيز الوضع المحلي...');
+            enterDashboard(900);return;
+          }
+
+          setPhase(15,8);setProgress(16,'جاري فحص الاتصال...');
+          let reachable=false;
+          try{reachable=await syncer.probeConnectivity({timeout:3800,minGap:0});}catch(_){reachable=false;}
+          if(!reachable){
+            saveGate(false,{reason:'offline-or-server-unreachable'});
+            setProgress(100,'تم تجهيز العمل بدون إنترنت...');
+            enterDashboard(1050);return;
+          }
+
+          let remaining=Number(core?.getSyncQueue?.().length||0);
+          let uploadResult={remaining};
+          if(remaining>0){
+            setPhase(22,28);setProgress(22,'جاري رفع البيانات المحفوظة...');
+            uploadResult=await syncer.syncAll({manual:true,forceRetry:true});
+            remaining=Number(core?.getSyncQueue?.().length||uploadResult?.remaining||0);
+            if(remaining>0 && await syncer.probeConnectivity({timeout:3800,minGap:0}).catch(()=>false)){
+              setPhase(34,16);setProgress(34,'جاري استكمال رفع البيانات...');
+              await new Promise(r=>setTimeout(r,450));
+              uploadResult=await syncer.syncAll({manual:true,forceRetry:true});
+              remaining=Number(core?.getSyncQueue?.().length||uploadResult?.remaining||0);
+            }
+          }else{
+            setProgress(50,'جاري جلب بيانات الأجهزة...');
+          }
+
+          let pullResult=null;
+          let failed=0;
+          if(remaining===0){
+            setPhase(52,40);setProgress(52,'جاري مزامنة جميع البيانات...');
+            pullResult=await syncer.pullAllWithRetry({force:true,concurrency:6,reason:'login-gate'});
+            failed=Number(pullResult?.failed||0);
+            remaining=Number(core?.getSyncQueue?.().length||pullResult?.remaining||0);
+          }
+
+          try{await core?.flushDurableLocalWrites?.();}catch(_){}
+          if(remaining===0 && failed===0){
+            saveGate(true,{reason:'full-sync-complete'});
+            setProgress(100,'اكتملت المزامنة بنجاح...');
+            mainTitle.textContent='تمت المزامنة بنجاح';
+            subTitle.textContent='لحظات ونكون جاهزين...';
+            enterDashboard(700);return;
+          }
+
+          saveGate(false,{reason:'partial-sync',remaining,failed});
+          setProgress(100,'تم حفظ البيانات وسيتم استكمال المزامنة...');
+          enterDashboard(1200);
+        }catch(error){
+          console.error('[CASH TOP] login sync gate:',error);
+          saveGate(false,{reason:'sync-error',message:String(error?.message||error||'')});
+          setProgress(100,'تم تأمين البيانات المحلية...');
+          enterDashboard(1500);
+        }finally{running=false;}
+      }
+
+      setProgress(10,'جاري جلب الصلاحيات...');
+      run();
+    })();
+    </script>
+</body>
+</html>

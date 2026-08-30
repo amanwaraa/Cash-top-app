@@ -1,0 +1,9 @@
+CASH TOP R100
+
+- Business records and pending image uploads are durably backed by IndexedDB; Cache Storage is no longer used for new pending image data.
+- Existing R99 pending-image fallback cache entries migrate once into IndexedDB without losing queued photos.
+- Sales invoice save now waits for a verified local durable commit before showing success.
+- The invoice list re-reads after IndexedDB restore so a saved invoice cannot disappear when localStorage is full.
+- Cloud pull is gated behind local data + sync-queue restoration to prevent an older remote snapshot overwriting an unsynced local invoice.
+- Sync attempts persist the queue and changed datasets in IndexedDB before network I/O and retain automatic retry.
+- Cache First app shell bumped to R100; application pages still open from cache immediately even while online.

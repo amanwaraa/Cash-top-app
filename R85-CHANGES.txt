@@ -1,0 +1,13 @@
+CASH TOP 2 — R85
+
+1) Sales-return product autocomplete waits for IndexedDB restore and searches the local products.
+2) Product suggestions use a fixed portal so mobile/table overflow cannot hide the list.
+3) Selecting a product fills the sale price and only the unit used when adding that product.
+4) Service Worker is hardened as Offline-First: root, login, pages, scripts and local assets are served from Cache Storage before network.
+5) PWA start_url is the app root and the root shell is cached explicitly.
+6) Refreshed/in-scope navigation falls back to the cached app shell instead of Chromium's no-internet screen.
+7) Incomplete Service Worker upgrades keep the previous app cache as an offline fallback.
+8) Pending changes and sync queue are flushed to durable IndexedDB on background/page hide/close.
+9) Background Sync is registered when supported; online/pageshow also retry pending changes.
+10) Offline additions/edits/deletes remain local and are synchronized when connectivity returns.
+11) Cache/version bumped to R85.

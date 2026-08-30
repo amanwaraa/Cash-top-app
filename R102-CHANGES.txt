@@ -1,0 +1,10 @@
+CashTop R102 - Cart Product Images Fix
+======================================
+
+- Added product images to each item inside the cashier basket/cart.
+- Basket images use the exact same managed image loader as product cards.
+- Pending local product images are tried first, then the stored remote image URL.
+- Failed remote loads use the existing retry/cache-purge mechanism without flashing a fallback icon.
+- The product fallback icon is shown only when the product has no image at all.
+- Kept basket layout responsive with a fixed 40x40 image area to prevent layout jumping/flicker.
+- JavaScript syntax checked after the change.

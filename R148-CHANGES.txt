@@ -1,0 +1,25 @@
+Cash Top R148 - Printer / stability fixes
+
+1) Printer
+- Keeps the saved Bluetooth printer identity and attempts silent reconnect when pages open/return to foreground.
+- If direct Bluetooth printing is enabled, printing no longer falls back to the system print dialog / Save as PDF when the printer connection fails.
+- Faster BLE transfer: larger write chunks and minimal delay, with automatic safe fallback for printers that reject large chunks.
+- Reduced thermal invoice rendering overhead for faster print start.
+- Native Android / WebView thermal bridge remains preferred when available.
+
+2) Invoice register crash / lag
+- Coalesced repeated invoice refresh events into one short debounced refresh.
+- Prevented repeated full table rebuilds during bursts of sync events.
+- Kept existing 50-record pager behavior.
+
+3) Cashier customer pricing
+- Removed duplicate product/customer/group sync listeners that caused repeated refreshes.
+- Changing a customer or customer price group updates prices in the existing product cards instead of rebuilding the whole grid.
+- This prevents the product list from jumping back to the top while the cashier is working.
+
+4) WhatsApp / customer messages
+- Customer WhatsApp numbers are no longer automatically prefixed with 972.
+- The number is used as entered (with only formatting characters stripped).
+
+5) Cache
+- Service worker cache version bumped so the new fixes replace older cached printer/cashier/invoice code.
